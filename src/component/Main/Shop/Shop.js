@@ -8,7 +8,11 @@ import Contact from './Contact/Contact';
 import Home from './Home/Home';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import Header from './Header';
+import SPACING from '../../../config/SPACING';
+import COLOR from '../../../config/COLOR';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -25,18 +29,66 @@ function MyTabs() {
 const Shop = ({navigation}) => {
   const openDrawer = ()=> navigation.openDrawer();
     return (
-      <SafeAreaView style={{flex:1}}>
+     
+      <SafeAreaView style={{flex:1,}}>
       <Header openDrawer={openDrawer} />
   
      <Tab.Navigator 
-     screenOptions={{headerShown:false}}>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Contact" component={Contact} />
-        <Tab.Screen name="Cart" component={Cart} />
-        <Tab.Screen name="Search" component={Search} />
+     screenOptions={{headerShown:false, tabBarActiveTintColor:COLOR.primary}}>
+        <Tab.Screen
+        options={{
+          tabBarIcon: (tabInfo)=>{
+          return (
+            <Ionicons name='home-sharp'
+            size={SPACING*2.7}
+            color={tabInfo.focused ? COLOR.primary : 'gray'}
+            />
+          )
+        }}}
+         name="Home" component={Home} />  
+       <Tab.Screen
+        options={{
+          tabBarBadge: 2,
+          tabBarBadgeStyle: {color:COLOR.white},
+          tabBarIcon: (tabInfo)=>{
+          return (
+            <Ionicons name='cart'
+            size={SPACING*2.7}
+            color={tabInfo.focused ? COLOR.primary : 'gray'}
+            />
+          )
+        }}}
+         name="Cart" component={Cart} />
+          <Tab.Screen
+        options={{
+          tabBarIcon: (tabInfo)=>{
+          return (
+            <Ionicons name='information'
+            size={SPACING*2.7}
+            color={tabInfo.focused ? COLOR.primary : 'gray'}
+
+            />
+          )
+        }}}
+         name="Contact" component={Contact} />
+      
+      <Tab.Screen
+        options={{
+          tabBarIcon: (tabInfo)=>{
+          return (
+            <Ionicons name='search'
+            size={SPACING*2.7}
+            color={tabInfo.focused ? COLOR.primary : 'gray'}
+            />
+          )
+        }}}
+         name="Search" component={Search} />
      </Tab.Navigator>
       </SafeAreaView>
           
+
+
+      
     );
 };
 

@@ -14,11 +14,11 @@ const Header = (props) => {
     const { height, width } = Dimensions.get('window');
     return (
         <View style={{ height: height / 8, backgroundColor: COLORS.primary }}>
-            <View style={{ padding: SPACING * 1.3 }}>
+            <View style={{ padding: SPACING * 1.6 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
                     <TouchableOpacity
                      onPress={props.openDrawer}>
-                        <Ionicons style={{marginLeft:-3}} name='menu' size={SPACING * 3.3} color={COLORS.white} />
+                        <Ionicons style={{marginLeft:-5}} name='menu' size={SPACING * 3.3} color={COLORS.white} />
                     </TouchableOpacity>
                     <Text 
                     style={{ fontSize: SPACING * 2.2,

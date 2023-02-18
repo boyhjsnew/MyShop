@@ -1,4 +1,6 @@
 export default {
     'primary' : '#2cab93' ,
-    'white' : "#FFF"
+    'white' : "#FFF", 
+    'gray':'#a0a29e'
+
 }
