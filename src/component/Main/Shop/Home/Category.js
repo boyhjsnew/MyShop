@@ -3,8 +3,16 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import COLOR from '../../../../config/COLOR';
 import SPACING from '../../../../config/SPACING';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 const { height, width } = Dimensions.get('window');
+
+const categorys = [
+    { tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
+    { titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
+    { tittle: 'titile 3', image: require('../../../../assets/BannerColection.png')}
+
+]
 
 // create a component
 const Category = () => {
@@ -25,15 +33,32 @@ const Category = () => {
                     fontSize: SPACING * 1.8,
                     color: COLOR.gray,
                     fontWeight: '400'
-                }}>spring collection</Text>
+                }}>category</Text>
 
             <View style={{
                 marginTop: SPACING * 0.6,
                 flex: 1,
             }}>
-                <Image
-                style={{height:'100%',width:'100%'}}
-                 source={require('../../../../assets/BannerColection.png')}></Image>
+                <SwiperFlatList
+                    contentContainerStyle={{ height: '100%', width:width}}
+                    index={1}
+                    paginationActiveColor={COLOR.primary}
+                    paginationDefaultColor={COLOR.white}
+                    showPagination
+                    autoplayLoop
+                    data={categorys}
+                    renderItem={({ item }) => (
+                        <View style={{flex:1}}>
+                            <Image
+                                style={{ height: '100%', width: "100%"}}
+                                source={item.image}></Image>
+                        </View>
+
+
+
+                    )}
+                />
+
             </View>
         </View>
     );
