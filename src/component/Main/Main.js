@@ -13,28 +13,22 @@ import OrderHistory from '../OrderHistory/OrderHistory';
 const Drawer = createDrawerNavigator();
 // create a component
 const Main = ({navigation}) => {
-    const goToAuthencation =()=>{
-        return navigation.navigate("Authencation");
-    }
-    const goToChangeInfo =()=>{
-        return navigation.navigate("Changeinfo");
-    }
-    const goToOrderHistory =()=>{
-        return navigation.navigate("OrderHistory");
-    }
-
+   
     return (
       
         <NavigationContainer>
             <Drawer.Navigator
+            drawerContent={({navigation})=>{
+                return <Menu navigation={navigation}/>
+            }}
             screenOptions={{headerShown:false}}>
              <Drawer.Screen name="Shop" component={Shop}>
                 </Drawer.Screen>
                 <Drawer.Screen name="Authencation" component={Authencation}>
                 </Drawer.Screen>
-                <Drawer.Screen name="Changinfo" component={Changeinfo}>
+                <Drawer.Screen name="Changeinfo" component={Changeinfo}>
                 </Drawer.Screen>
-                <Drawer.Screen name="Order History" component={OrderHistory}>
+                <Drawer.Screen name="OrderHistory" component={OrderHistory}>
                 </Drawer.Screen>
             </Drawer.Navigator>
         </NavigationContainer>
