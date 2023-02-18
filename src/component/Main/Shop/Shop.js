@@ -8,6 +8,7 @@ import Contact from './Contact/Contact';
 import Home from './Home/Home';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
+import Header from './Header';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,17 +23,11 @@ function MyTabs() {
 
 // create a component
 const Shop = ({navigation}) => {
+  const openDrawer = ()=> navigation.openDrawer();
     return (
-      <View style={{flex:1}}>
-      <SafeAreaView>
-      <TouchableOpacity
-      onPress={()=> navigation.openDrawer()}>
-        <Text>Open Menu</Text>
-      </TouchableOpacity>
-      <View style={{backgroundColor:'red', height:100}}>
-      <Text>Top bar</Text>
-      </View>
-       </SafeAreaView>
+      <SafeAreaView style={{flex:1}}>
+      <Header openDrawer={openDrawer} />
+  
      <Tab.Navigator 
      screenOptions={{headerShown:false}}>
         <Tab.Screen name="Home" component={Home} />
@@ -40,7 +35,7 @@ const Shop = ({navigation}) => {
         <Tab.Screen name="Cart" component={Cart} />
         <Tab.Screen name="Search" component={Search} />
      </Tab.Navigator>
-      </View>
+      </SafeAreaView>
           
     );
 };

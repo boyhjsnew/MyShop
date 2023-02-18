@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import Menu from './Menu';
 import Shop from './Shop/Shop';
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,8 +15,8 @@ const Drawer = createDrawerNavigator();
 const Main = ({navigation}) => {
    
     return (
-      
-        <NavigationContainer>
+      <SafeAreaView style={{flex:1}}>
+           <NavigationContainer>
             <Drawer.Navigator
             drawerContent={({navigation})=>{
                 return <Menu navigation={navigation}/>
@@ -32,6 +32,8 @@ const Main = ({navigation}) => {
                 </Drawer.Screen>
             </Drawer.Navigator>
         </NavigationContainer>
+      </SafeAreaView>
+     
     );
 };
 
