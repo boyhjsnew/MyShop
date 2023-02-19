@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,6 +11,7 @@ import SPACING from '../../../config/SPACING';
 
 // create a component
 const Header = (props) => {
+    
     const { height, width } = Dimensions.get('window');
     return (
         <View style={{ height: height / 8, backgroundColor: COLORS.primary }}>

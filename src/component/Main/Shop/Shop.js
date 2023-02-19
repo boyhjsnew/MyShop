@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -28,6 +28,8 @@ function MyTabs() {
 // create a component
 const Shop = ({navigation}) => {
   const openDrawer = ()=> navigation.openDrawer();
+
+ 
     return (
      
       <SafeAreaView style={{flex:1,}}>
