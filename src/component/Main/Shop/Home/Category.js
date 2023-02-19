@@ -13,16 +13,16 @@ const { height, width } = Dimensions.get('window');
 
 // create a component
 const Category = () => {
-    const [indexCategory, setIndexCategory]= useState(0);
+    const [indexCategory, setIndexCategory] = useState(0);
     const categorys = [
         { tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
         { titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
         { tittle: 'titile 3', image: require('../../../../assets/BannerColection.png') }
 
     ]
-    const onChange =(nativeEvent)=>{
-      const slide = (Math.floor((nativeEvent.contentOffset.x + width /2 )/ width)) 
-      setIndexCategory(slide)
+    const onChange = (nativeEvent) => {
+        const slide = (Math.floor((nativeEvent.contentOffset.x + width / 2) / width))
+        setIndexCategory(slide)
     }
 
     return (
@@ -47,12 +47,12 @@ const Category = () => {
             <View style={{
                 marginTop: SPACING * 0.6,
                 flex: 1,
-                alignItems:'center',
-                justifyContent:'flex-end'
-                
+                alignItems: 'center',
+                justifyContent: 'flex-end'
+
             }}>
                 <ScrollView
-                    onScroll={({nativeEvent})=>{onChange(nativeEvent)}}
+                    onScroll={({ nativeEvent }) => { onChange(nativeEvent) }}
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     snapToInterval={width}
@@ -66,15 +66,19 @@ const Category = () => {
                         </Image>)}
                 </ScrollView>
 
-               
-                    <View style={{ position:'absolute', flexDirection:'row',padding:SPACING/2, justifyContent:'space-between', width:width/9}}>
-                    {categorys.map((item,index )=>
-                        <Text style={{  fontSize: 7,
-                          color: index == indexCategory?  COLOR.primary : COLOR.white }}>{'\u2B24'}</Text>   )}
-              
+
+                <View style={{ position: 'absolute', flexDirection: 'row', padding: SPACING / 2, justifyContent: 'space-between', width: width / 9 }}>
+                    {categorys.map((item, index) =>
+                        <Text
+                        key={index.toString()}
+                            style={{
+                                fontSize: 7,
+                                color: index == indexCategory ? COLOR.primary : COLOR.white
+                            }}>{'\u2B24'}</Text>)}
+
                 </View>
-             
-                
+
+
 
             </View>
         </View>
