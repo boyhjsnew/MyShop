@@ -1,21 +1,30 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
 import COLOR from '../../../../config/COLOR';
 import SPACING from '../../../../config/SPACING';
-import { SwiperFlatList } from 'react-native-swiper-flatlist';
+
+import { ScrollView } from 'react-native-gesture-handler';
+import { ceil } from 'react-native-reanimated';
 
 const { height, width } = Dimensions.get('window');
 
-const categorys = [
-    { tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
-    { titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
-    { tittle: 'titile 3', image: require('../../../../assets/BannerColection.png')}
 
-]
 
 // create a component
 const Category = () => {
+    const [indexCategory, setIndexCategory]= useState(0);
+    const categorys = [
+        { tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
+        { titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
+        { tittle: 'titile 3', image: require('../../../../assets/BannerColection.png') }
+
+    ]
+    const onChange =(nativeEvent)=>{
+      const slide = (Math.floor((nativeEvent.contentOffset.x + width /2 )/ width)) 
+      setIndexCategory(slide)
+    }
+
     return (
         <View style={{
             height: height * 0.3,
@@ -38,41 +47,41 @@ const Category = () => {
             <View style={{
                 marginTop: SPACING * 0.6,
                 flex: 1,
+                alignItems:'center',
+                justifyContent:'flex-end'
+                
             }}>
-                <SwiperFlatList
-                    contentContainerStyle={{ height: '100%', width:width}}
-                    index={1}
-                    paginationActiveColor={COLOR.primary}
-                    paginationDefaultColor={COLOR.white}
-                    showPagination
-                    autoplayLoop
-                    data={categorys}
-                    renderItem={({ item }) => (
-                        <View style={{flex:1}}>
-                            <Image
-                                style={{ height: '100%', width: "100%"}}
-                                source={item.image}></Image>
-                        </View>
+                <ScrollView
+                    onScroll={({nativeEvent})=>{onChange(nativeEvent)}}
+                    showsHorizontalScrollIndicator={false}
+                    pagingEnabled
+                    snapToInterval={width}
+                    contentContainerStyle={{ height: '100%', width: width * categorys.length }}
+                    horizontal>
+                    {categorys.map((category, index) =>
+                        <Image
+                            style={{ width: width, height: '100%' }}
+                            key={index.toString()}
+                            source={category.image}>
+                        </Image>)}
+                </ScrollView>
 
-
-
-                    )}
-                />
+               
+                    <View style={{ position:'absolute', flexDirection:'row',padding:SPACING/2, justifyContent:'space-between', width:width/9}}>
+                    {categorys.map((item,index )=>
+                        <Text style={{  fontSize: 7,
+                          color: index == indexCategory?  COLOR.primary : COLOR.white }}>{'\u2B24'}</Text>   )}
+              
+                </View>
+             
+                
 
             </View>
         </View>
     );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
-    },
-});
+
 
 //make this component available to the app
 export default Category;
