@@ -21,10 +21,13 @@ const Menu = ({ navigation }) => {
   const goToOrderHistory = () => {
     return navigation.navigate("OrderHistory");
   }
-  const [isLogin, setIsLogin]= useState(true);
+
+  // state login
+  const [isLogin, setIsLogin]= useState(false);
   const SIGN_IN = () =>
     <View>
-      <TouchableOpacity style={btnSignIn}>
+      <TouchableOpacity style={btnSignIn}
+      onPress={goToAuthencation}>
         <Text style={btnText}>sign in</Text>
       </TouchableOpacity>
     </View>
@@ -46,9 +49,7 @@ const Menu = ({ navigation }) => {
 
   </View>
 
-
   const { container, Img, btnSignIn, btnText, btnForLogin, btnTextForLogin, contenForLogin, txtUsername } = styles;
-
 
   return (
     <View style={container}>
@@ -57,7 +58,6 @@ const Menu = ({ navigation }) => {
         source={require('../../assets/user.png')}></Image>
         {/* SING_IN or LOGGED */}
        {isLogin ? <LOGGED/> : <SIGN_IN/>}
-
     </View>
   );
 };
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  Img: {
+  Img:{
     width: 80,
     height: 80,
     borderRadius: 40,
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     marginBottom: SPACING * 2
   },
   btnSignIn: {
-
     alignItems: 'center',
     justifyContent: 'center',
     height: height / 17,
@@ -118,6 +117,7 @@ const styles = StyleSheet.create({
   contenForLogin: {
     height: height / 2.5,
     justifyContent: 'space-between'
+
   }
 })
 
