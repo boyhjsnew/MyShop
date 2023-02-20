@@ -1,25 +1,40 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
+import 'react-native-gesture-handler';
 import { View, Text, StyleSheet } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import SearchView from './SearchView'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import ListProduct from '../ListProduct/ListProduct';
+import ProductDetail from '../ProductDetail/ProductDetail';
+
+
+const Stack = createStackNavigator();
 
 // create a component
+
 const Search = () => {
-    return (
-        <View style={styles.container}>
-            <Text>Search</Text>
-        </View>
-    );
+
+
+  return (
+    <NavigationContainer
+      independent={true}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name='SearchView'
+          component={SearchView}>
+        </Stack.Screen>
+        <Stack.Screen
+          name='ProductDetail'
+          component={ProductDetail}>
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2c3e50',
-    },
-});
+
 
 //make this component available to the app
 export default Search;
