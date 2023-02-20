@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import COLOR from '../../config/COLOR';
@@ -7,17 +7,80 @@ import SPACING from '../../config/SPACING';
 import { TextInput } from 'react-native-gesture-handler';
 
 // create a component
-const {width} =Dimensions.get('window'); 
+const { width } = Dimensions.get('window');
 const Authencation = ({ navigation }) => {
     const backToMain = () => {
         return navigation.goBack();
     }
-    const { container, header, btnBack, txtHeader, formLogin,boxButton,btnSignIn,txtSignIn,btnSignUp,txtSignUp,edtEmail,formPassowrd,edtPassword, form_btn,btnSignInNow} = styles;
+
+    //State Login or Register 
+    // true = SignIn , false =SignUp
+    const [isSignIn, setIsSignIn] = useState(true);
+    const FormLogin = () => {
+        return <View>
+            {/* form login */}
+            <View style={formLogin}>
+                <TextInput
+                    style={edtEmail}
+                    placeholder='Enter your email'></TextInput>
+            </View>
+            <View style={formPassowrd}>
+                <TextInput
+                    secureTextEntry
+                    style={edtPassword}
+                    placeholder='Enter your password'></TextInput>
+            </View>
+            <TouchableOpacity style={btnSignInNow}>
+                <Text style={{ color: COLOR.white }}>SIGN IN NOW</Text>
+            </TouchableOpacity>
+            {/* form login */}
+        </View>
+    }
+    const FormRegister = () => {
+        return <View>
+            {/* form register */}
+            <View style={formLogin}>
+                <TextInput
+                    style={edtEmail}
+                    placeholder='Enter your name'></TextInput>
+            </View>
+            <View style={formPassowrd}>
+                <TextInput
+                    secureTextEntry
+                    style={edtPassword}
+                    placeholder='Enter your email'></TextInput>
+            </View>
+            <View style={formPassowrd}>
+                <TextInput
+                    secureTextEntry
+                    style={edtPassword}
+                    placeholder='Enter your password'></TextInput>
+            </View>
+            <View style={formPassowrd}>
+                <TextInput
+                    secureTextEntry
+                    style={edtPassword}
+                    placeholder='Confirm Password'></TextInput>
+            </View>
+            <TouchableOpacity style={btnSignInNow}>
+                <Text style={{ color: COLOR.white }}>SIGN UP NOW</Text>
+            </TouchableOpacity>
+            {/* form register */}
+
+        </View>
+    }
+
+
+
+
+
+    const { container, header, btnBack, txtHeader, formLogin, boxButton, btnSignIn, txtBtnActive, btnSignUp, txtSignUp, edtEmail, formPassowrd, edtPassword, form_btn, btnSignInNow ,txtBtnNoActive} = styles;
     return (
         <View style={styles.container}>
             {/* Header */}
             <View style={header}>
-                <TouchableOpacity style={btnBack}>
+                <TouchableOpacity style={btnBack}
+                    onPress={backToMain}>
                     <Ionicons size={SPACING * 4} name='chevron-back'
                         color={COLOR.white}></Ionicons>
                 </TouchableOpacity>
@@ -28,35 +91,25 @@ const Authencation = ({ navigation }) => {
             </View>
 
             <View style={form_btn}>
-            <View style={{flex:1, justifyContent:'center'}} >
-            {/* form login */}
-            <View style={formLogin}>
-            <TextInput
-                style={edtEmail}
-                placeholder='Enter your email'></TextInput>
-            </View>
-            <View style={formPassowrd}>
-                <TextInput
-                style={edtPassword}
-                placeholder='Enter your password'></TextInput>
-            </View>
-            <TouchableOpacity style={btnSignInNow}>
-               <Text>SIGN IN NOW</Text>
-            </TouchableOpacity>
+                <View style={{ flex: 1, justifyContent: 'center' }} >
+                    {/* Login or Register */}
+                    {isSignIn ? <FormLogin/> : <FormRegister/>}
+
+                </View>
+                {/* button */}
+                <View style={boxButton}>
+                    <TouchableOpacity style={btnSignIn}
+                    onPress={()=>setIsSignIn(!isSignIn)}>
+                        <Text style={ isSignIn ? txtBtnActive : txtBtnNoActive}>SIGN IN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={btnSignUp}
+                    onPress={()=>setIsSignIn(!isSignIn)}>
+                        <Text style={ isSignIn ?  txtBtnNoActive : txtBtnActive}>SIGN UP</Text>
+                    </TouchableOpacity>
+                </View>
 
             </View>
-            {/* button */}
-            <View style={boxButton}>
-                <TouchableOpacity style={btnSignIn}>
-                    <Text style={txtSignIn}>SIGN IN</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={btnSignUp}>
-                    <Text style={txtSignUp}>SIGN UP</Text>
-                </TouchableOpacity>
-            </View>
 
-            </View>
-         
         </View>
     );
 };
@@ -66,91 +119,99 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.primary,
-        justifyContent:'space-between',
-    
+        justifyContent: 'space-between',
+
     },
     header: {
         justifyContent: 'space-around',
         flexDirection: 'row',
     },
-  
-    txtHeader:{
-        marginVertical:SPACING /2,
-        fontSize:SPACING *2.5,
-        color:COLOR.white,
-        fontFamily:'Avenir'
+
+    txtHeader: {
+        marginVertical: SPACING / 2,
+        fontSize: SPACING * 2.5,
+        color: COLOR.white,
+        fontFamily: 'Avenir'
     },
-    boxButton:{
-        alignItems:'center',
-        justifyContent:'center',
-        alignSelf:'center',
-        width:width /1.2 ,
-        flexDirection:'row',
+    boxButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: width / 1.2,
+        flexDirection: 'row',
     },
-    btnSignIn:{
-        flex:1,
-        marginRight:SPACING/8 ,
-        alignItems:'center',
-        borderTopLeftRadius :50 ,
-        borderBottomLeftRadius:50,
-        backgroundColor: COLOR.white, 
-        paddingVertical:SPACING *1.7,
-        fontWeight:'600',       
-        fontFamily: 'Avenir' 
+    btnSignIn: {
+        flex: 1,
+        marginRight: SPACING / 8,
+        alignItems: 'center',
+        borderTopLeftRadius: 50,
+        borderBottomLeftRadius: 50,
+        backgroundColor: COLOR.white,
+        paddingVertical: SPACING * 1.7,
+        fontWeight: '600',
+        fontFamily: 'Avenir'
     },
-    txtSignIn:{
-        color:COLOR.primary
-    },
-    btnSignUp:{
-        flex:1,
-        alignItems:'center',
-        backgroundColor: COLOR.white, 
-        paddingVertical:SPACING *1.7,
-        borderTopRightRadius:50 ,
-        borderBottomRightRadius:50,
-        marginLeft:SPACING/8,
-        fontWeight:'600',
+    txtBtnActive: {
+        fontWeight:'500',
+        color: COLOR.primary
         
     },
-    edtEmail:{
-        borderRadius:100,
-        fontSize:SPACING *1.6,
-        paddingLeft:SPACING*1.4,
-        alignItems:'center',
-        justifyContent:'center',
-        alignSelf:'center',
-        width:width /1.2 ,
-        height:SPACING *5.5,
-        backgroundColor:COLOR.white
+    txtBtnNoActive: {
+        color: 'gray',
+        fontWeight:'500',
+        
     },
-    edtPassword:{
-        height:SPACING *5.5,
-        marginTop:SPACING,
-        borderRadius:100,
-        fontSize:SPACING *1.6,
-        paddingLeft:SPACING*1.4,
-        alignItems:'center',
-        justifyContent:'center',
-        alignSelf:'center',
-        width:width /1.2 ,
-        backgroundColor:COLOR.white
-    },
-    btnSignInNow:{
-        marginTop:SPACING,
-        borderRadius:100,
-        fontSize:SPACING *1.6,
-        paddingLeft:SPACING*1.5,
-        alignItems:'center',
-        justifyContent:'center',
-        alignSelf:'center',
-        width:width /1.2 ,
-        borderWidth:1,
-        paddingVertical:SPACING *1.7,
+    btnSignUp: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: COLOR.white,
+        paddingVertical: SPACING * 1.7,
+        borderTopRightRadius: 50,
+        borderBottomRightRadius: 50,
+        marginLeft: SPACING / 8,
+        fontWeight: '600',
 
     },
-    form_btn:{
-        flex:1,
-        justifyContent:'space-between',
+    edtEmail: {
+        borderRadius: 100,
+        fontSize: SPACING * 1.6,
+        paddingLeft: SPACING * 1.4,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: width / 1.2,
+        height: SPACING * 5.5,
+        backgroundColor: COLOR.white
+    },
+    edtPassword: {
+        height: SPACING * 5.5,
+        marginTop: SPACING,
+        borderRadius: 100,
+        fontSize: SPACING * 1.6,
+        paddingLeft: SPACING * 1.4,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: width / 1.2,
+        backgroundColor: COLOR.white
+    },
+    btnSignInNow: {
+        borderColor: COLOR.white,
+        marginTop: SPACING,
+        borderRadius: 100,
+        fontSize: SPACING * 1.6,
+        paddingLeft: SPACING * 1.5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        width: width / 1.2,
+        borderWidth: 1,
+        paddingVertical: SPACING * 1.7,
+
+    },
+    form_btn: {
+        flex: 1,
+        justifyContent: 'space-between',
 
     }
 });

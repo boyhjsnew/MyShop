@@ -16,14 +16,7 @@ import COLOR from '../../../config/COLOR';
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  );
-}
+
 
 // create a component
 const Shop = ({navigation}) => {
@@ -36,6 +29,7 @@ const Shop = ({navigation}) => {
       <Header openDrawer={openDrawer} />
   
      <Tab.Navigator 
+     independent={true}
      screenOptions={{headerShown:false, tabBarActiveTintColor:COLOR.primary}}>
         <Tab.Screen
         options={{

@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from 'react-native';
 import COLOR from '../../../../config/COLOR';
 import SPACING from '../../../../config/SPACING';
 
@@ -12,17 +12,21 @@ const { height, width } = Dimensions.get('window');
 
 
 // create a component
-const Category = () => {
+const Category = (props) => {
+   
     const [indexCategory, setIndexCategory] = useState(0);
     const categorys = [
-        { tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
-        { titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
-        { tittle: 'titile 3', image: require('../../../../assets/BannerColection.png') }
+        { 'id':"1",tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
+        { 'id':'2',titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
+        { 'id':'3',tittle: 'titile 3', image: require('../../../../assets/BannerColection.png') }
 
     ]
     const onChange = (nativeEvent) => {
         const slide = (Math.floor((nativeEvent.contentOffset.x + width / 2) / width))
         setIndexCategory(slide)
+    }
+    const goToListProduct =()=>{
+        return props.navigation.navigate("ListProduct")
     }
 
     return (
@@ -42,7 +46,7 @@ const Category = () => {
                     fontSize: SPACING * 1.8,
                     color: COLOR.gray,
                     fontWeight: '400'
-                }}>category</Text>
+                }}>list of category</Text>
 
             <View style={{
                 marginTop: SPACING * 0.6,
@@ -52,6 +56,7 @@ const Category = () => {
 
             }}>
                 <ScrollView
+                    scrollEventThrottle={16}
                     onScroll={({ nativeEvent }) => { onChange(nativeEvent) }}
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
@@ -59,11 +64,20 @@ const Category = () => {
                     contentContainerStyle={{ height: '100%', width: width * categorys.length }}
                     horizontal>
                     {categorys.map((category, index) =>
+                    <TouchableOpacity
+                    onPress={goToListProduct}
+                    key={category.id}
+                     style={{justifyContent:'center' ,alignItems:'center'}}>
                         <Image
                             style={{ width: width, height: '100%' }}
-                            key={index.toString()}
+                            
                             source={category.image}>
-                        </Image>)}
+                        </Image> 
+                        <Text
+                        style={{position:'absolute',fontSize:SPACING *2,color:'gray', fontFamily:'Avenir', }}
+                      >{category.tittle}</Text>
+                    </TouchableOpacity>
+                        )}
                 </ScrollView>
 
 

@@ -1,21 +1,41 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
+import 'react-native-gesture-handler';
 import { View, Text, StyleSheet } from 'react-native';
-import Collection from './Collection';
-import Category from './Category';
-import TopProduct from './TopProduct';
-import { ScrollView } from 'react-native-gesture-handler';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeView from './HomeView'
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import ListProduct from '../ListProduct/ListProduct';
+import ProductDetail from '../ProductDetail/ProductDetail';
+
+
+const Stack = createStackNavigator();
 
 // create a component
-const Home = () => {
-    return (
-        <ScrollView style={{backgroundColor:'#BDBDB8', flex:1 }}>
-          {/* <Collection/>
-          <Category/> */}
-          <TopProduct/>
 
-        </ScrollView>
-    );
+const Home = () => {
+
+
+  return (
+    <NavigationContainer
+      independent={true}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name='HomeView'
+          component={HomeView}>
+        </Stack.Screen>
+        <Stack.Screen
+          name='ListProduct'
+          component={ListProduct}>
+        </Stack.Screen>
+        <Stack.Screen
+          name='ProductDetail'
+          component={ProductDetail}>
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
 

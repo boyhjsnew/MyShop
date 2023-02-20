@@ -4,27 +4,30 @@ import { SafeAreaView } from 'react-native';
 import Menu from './Menu';
 import Shop from './Shop/Shop';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Authencation from '../Authencation/Authencation';
 import Changeinfo from '../ChangeInfo/Changinfo';
 import OrderHistory from '../OrderHistory/OrderHistory';
+import COLOR from '../../config/COLOR';
 
 const Drawer = createDrawerNavigator();
 // create a component
-const Main = ({navigation}) => {
+const Main = () => {
    
     return (
       <SafeAreaView style={{flex:1}}>
-           <NavigationContainer>
+           <NavigationContainer independent={true}>
             <Drawer.Navigator
+          
             drawerContent={({navigation})=>{
                 return <Menu navigation={navigation}/>
             }}
-            screenOptions={{headerShown:false}}>
+            screenOptions={{headerShown:false,}}>
              <Drawer.Screen name="Shop" component={Shop}>
                 </Drawer.Screen>
-                <Drawer.Screen name="Authencation" component={Authencation}>
+                <Drawer.Screen
+                name="Authencation" component={Authencation}>
                 </Drawer.Screen>
                 <Drawer.Screen name="Changeinfo" component={Changeinfo}>
                 </Drawer.Screen>
