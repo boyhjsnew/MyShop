@@ -21,6 +21,7 @@ const Home = () => {
     <NavigationContainer
       independent={true}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+       
         <Stack.Screen
           name='HomeView'
           component={HomeView}>

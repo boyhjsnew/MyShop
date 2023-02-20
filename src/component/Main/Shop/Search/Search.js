@@ -17,6 +17,7 @@ const Stack = createStackNavigator();
 const Search = () => {
 
 
+
   return (
     <NavigationContainer
       independent={true}>
