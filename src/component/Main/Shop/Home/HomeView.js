@@ -11,13 +11,14 @@ import { useNavigation } from '@react-navigation/native';
 // create a component
 
 const HomeView = (props) => {
-  const navigation = useNavigation()
-  const {types}=props
+  const navigation = useNavigation();
+  const {types,topProducts}=props
+
     return (
         <ScrollView style={{backgroundColor:'#BDBDB8', flex:1 }}>
           <Collection/>
           <Category navigation={navigation} types={types}/>
-          <TopProduct navigation={navigation}/>
+          <TopProduct navigation={navigation} topProducts= {topProducts}/>
         </ScrollView>
     );
 };

@@ -16,16 +16,18 @@ const Stack = createStackNavigator();
 
 
 const Home = (props) => {
-  const {types} =props
+  const {types, topProducts} =props
   
   return (
     
     <NavigationContainer
       independent={true}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator 
+      initialRouteName='ProductDetail'
+      screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name='HomeView'>
-          {(props)=><HomeView {...props} types={types}></HomeView>}
+          {(props)=><HomeView {...props} types={types}  topProducts={topProducts}></HomeView>}
         </Stack.Screen>
         <Stack.Screen
           name='ListProduct'

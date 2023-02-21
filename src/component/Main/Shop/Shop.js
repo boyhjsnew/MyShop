@@ -21,6 +21,7 @@ const Tab = createBottomTabNavigator();
 // create a component
 const Shop = ({navigation}) => {  
   const [types , setTypes] = useState([]);
+  const [topProducts, setTopProducts] =useState([])
 
   //get categorys
   const getTypesApiAsync = async () => {
@@ -29,14 +30,26 @@ const Shop = ({navigation}) => {
         'http://192.168.1.152:8080/api/',
       );
       const json = await response.json();
-      return setTypes(json.type);
+      return setTypes(json.type),setTopProducts(json.product)
     } catch (error) {
       console.error(error);
     }
   };
+  // const getTopProductApiAsync = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       'http://192.168.1.152:8080/api/',
+  //     );
+  //     const json = await response.json();
+  //     return setTopProducts(json.product) 
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(()=>{
-    getTypesApiAsync()
+    getTypesApiAsync() ;
+    // getTopProductApiAsync()
   },[])
   
   const openDrawer = ()=> navigation.openDrawer(); 
@@ -58,7 +71,7 @@ const Shop = ({navigation}) => {
           )
         }}}
          name="Home" >
-           {(props) => <Home {...props} types = {types}/>}
+           {(props) => <Home {...props} types = {types} topProducts= {topProducts}/>}
          </Tab.Screen>  
        <Tab.Screen
         options={{

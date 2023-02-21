@@ -79,9 +79,9 @@ const Category = (props) => {
                         <Text
                         key={index.toString()}
                             style={{
-                                paddingHorizontal:SPACING/4,
+                                width:SPACING *1.5,
                                 fontSize: 7,
-                                color: index == indexCategory ? COLOR.primary : COLOR.white
+                                color: index == indexCategory ? COLOR.primary : COLOR.gray
                             }}>{'\u2B24'}</Text>)}
 
                 </View>
