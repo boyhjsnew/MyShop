@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,24 +12,40 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Header from './Header';
 import SPACING from '../../../config/SPACING';
 import COLOR from '../../../config/COLOR';
+import HomeView from './Home/HomeView';
 
 
 const Tab = createBottomTabNavigator();
 
 
-
 // create a component
-const Shop = ({navigation}) => {
-  const openDrawer = ()=> navigation.openDrawer();
+const Shop = ({navigation}) => {  
+  const [types , setTypes] = useState([]);
 
- 
-    return (
+  //get categorys
+  const getTypesApiAsync = async () => {
+    try {
+      const response = await fetch(
+        'http://192.168.1.152:8080/api/',
+      );
+      const json = await response.json();
+      return setTypes(json.type);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(()=>{
+    getTypesApiAsync()
+  },[])
+  
+  const openDrawer = ()=> navigation.openDrawer(); 
+    return (     
      
       <SafeAreaView style={{flex:1,}}>
       <Header openDrawer={openDrawer} />
   
      <Tab.Navigator 
-     independent={true}
      screenOptions={{headerShown:false, tabBarActiveTintColor:COLOR.primary}}>
         <Tab.Screen
         options={{
@@ -41,7 +57,9 @@ const Shop = ({navigation}) => {
             />
           )
         }}}
-         name="Home" component={Home} />  
+         name="Home" >
+           {(props) => <Home {...props} types = {types}/>}
+         </Tab.Screen>  
        <Tab.Screen
         options={{
           tabBarBadge: 2,
@@ -81,10 +99,7 @@ const Shop = ({navigation}) => {
          name="Search" component={Search} />
      </Tab.Navigator>
       </SafeAreaView>
-          
 
-
-      
     );
 };
 

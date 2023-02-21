@@ -11,7 +11,6 @@ import { color } from 'react-native-reanimated';
 
 // create a component
 const ListProduct = ({ navigation }) => {
-
     const { container, header, wrapper, headerContent, txtNameCategory
         , viewitem, rowitem, img, infoproduct, nameproduct, priceproduct,
         materialproduct, subdetail, txtbtn
@@ -22,12 +21,12 @@ const ListProduct = ({ navigation }) => {
                 {/* header */}
                 <View style={header}>
                     <View style={headerContent}>
-                    <TouchableOpacity 
-                    onPress={()=>navigation.goBack()}
-                    >
-                        <Ionicons name='chevron-back' size={SPACING * 3} color={COLOR.purple}></Ionicons>
-                    </TouchableOpacity>
-                        
+                        <TouchableOpacity
+                            onPress={() => navigation.goBack()}
+                        >
+                            <Ionicons name='chevron-back' size={SPACING * 3} color={COLOR.purple}></Ionicons>
+                        </TouchableOpacity>
+
                         {/* category name */}
                         <Text style={txtNameCategory}>Party Dress</Text>
                         <View style={{ width: SPACING * 3 }}></View>
@@ -36,83 +35,77 @@ const ListProduct = ({ navigation }) => {
                 {/* row item */}
                 <TouchableOpacity>
                     <View style={viewitem}>
-                    <View style={rowitem}>
-                        {/* Image */}
-                        <View style={img}>
-                            <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
-                        </View>
-                        {/* info product */}
-                        <View style={infoproduct}>
-                            <Text style={nameproduct}>Lace Sleeve Si</Text>
-                            <Text style={priceproduct}>117$</Text>
-                            <Text style={materialproduct}>Matirial silk</Text>
-                            {/* color - btn show detaild */}
-                            <View style={subdetail}>
-                                <Text>Color RoyalBlue</Text>
-                                <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
-                                <TouchableOpacity>
-                                    <Text style={txtbtn}>Show Details</Text>
-                                </TouchableOpacity>
+                        <View style={rowitem}>
+                            {/* Image */}
+                            <View style={img}>
+                                <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
+                            </View>
+                            {/* info product */}
+                            <View style={infoproduct}>
+                                <Text style={nameproduct}>Lace Sleeve Si</Text>
+                                <Text style={priceproduct}>117$</Text>
+                                <Text style={materialproduct}>Matirial silk</Text>
+                                {/* color - btn show detaild */}
+                                <View style={subdetail}>
+                                    <Text>Color RoyalBlue</Text>
+                                    <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
+                                    <TouchableOpacity>
+                                        <Text style={txtbtn}>Show Details</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <View style={viewitem}>
-                    <View style={rowitem}>
-                        {/* Image */}
-                        <View style={img}>
-                            <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
-                        </View>
-                        {/* info product */}
-                        <View style={infoproduct}>
-                            <Text style={nameproduct}>Lace Sleeve Si</Text>
-                            <Text style={priceproduct}>117$</Text>
-                            <Text style={materialproduct}>Matirial silk</Text>
-                            {/* color - btn show detaild */}
-                            <View style={subdetail}>
-                                <Text>Color RoyalBlue</Text>
-                                <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
-                                <TouchableOpacity>
-                                    <Text style={txtbtn}>Show Details</Text>
-                                </TouchableOpacity>
+                        <View style={rowitem}>
+                            {/* Image */}
+                            <View style={img}>
+                                <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
+                            </View>
+                            {/* info product */}
+                            <View style={infoproduct}>
+                                <Text style={nameproduct}>Lace Sleeve Si</Text>
+                                <Text style={priceproduct}>117$</Text>
+                                <Text style={materialproduct}>Matirial silk</Text>
+                                {/* color - btn show detaild */}
+                                <View style={subdetail}>
+                                    <Text>Color RoyalBlue</Text>
+                                    <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
+                                    <TouchableOpacity>
+                                        <Text style={txtbtn}>Show Details</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <View style={viewitem}>
-                    <View style={rowitem}>
-                        {/* Image */}
-                        <View style={img}>
-                            <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
-                        </View>
-                        {/* info product */}
-                        <View style={infoproduct}>
-                            <Text style={nameproduct}>Lace Sleeve Si</Text>
-                            <Text style={priceproduct}>117$</Text>
-                            <Text style={materialproduct}>Matirial silk</Text>
-                            {/* color - btn show detaild */}
-                            <View style={subdetail}>
-                                <Text>Color RoyalBlue</Text>
-                                <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
-                                <TouchableOpacity>
-                                    <Text style={txtbtn}>Show Details</Text>
-                                </TouchableOpacity>
+                        <View style={rowitem}>
+                            {/* Image */}
+                            <View style={img}>
+                                <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
+                            </View>
+                            {/* info product */}
+                            <View style={infoproduct}>
+                                <Text style={nameproduct}>Lace Sleeve Si</Text>
+                                <Text style={priceproduct}>117$</Text>
+                                <Text style={materialproduct}>Matirial silk</Text>
+                                {/* color - btn show detaild */}
+                                <View style={subdetail}>
+                                    <Text>Color RoyalBlue</Text>
+                                    <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
+                                    <TouchableOpacity>
+                                        <Text style={txtbtn}>Show Details</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
                 </TouchableOpacity>
-                
-               
-              
-                
             </ScrollView>
-
-
         </View>
     );
 };
@@ -132,36 +125,31 @@ const styles = StyleSheet.create({
     header: {
         backgroundColor: COLOR.white,
         padding: SPACING / 2,
-
     },
     headerContent: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     txtNameCategory: {
-
         fontSize: SPACING * 1.8,
         alignSelf: 'center',
         fontFamily: 'Avenir',
         color: COLOR.purple
-
     },
     viewitem: {
-    
-        paddingHorizontal:SPACING,
+        paddingHorizontal: SPACING,
         backgroundColor: COLOR.white,
     },
-   
     img: {
         width: 80,
         height: (80 * 451) / 361,
     },
     rowitem: {
-        margin:SPACING/2,
+        margin: SPACING / 2,
         flexDirection: 'row',
         alignItems: 'center',
-        borderTopWidth:1,
-        borderColor:"#F0F0F1"
+        borderTopWidth: 1,
+        borderColor: "#F0F0F1"
     },
     infoproduct: {
         paddingVertical: SPACING,
@@ -171,30 +159,28 @@ const styles = StyleSheet.create({
         fontSize: SPACING * 1.75,
         fontFamily: 'Avenir',
         color: COLOR.gray,
-        paddingBottom: SPACING 
+        paddingBottom: SPACING
     },
     priceproduct: {
-        paddingBottom: SPACING ,
+        paddingBottom: SPACING,
         color: COLOR.purple,
         fontFamily: 'Avenir',
-        fontWeight:"500"
+        fontWeight: "500"
     },
     materialproduct: {
         fontFamily: 'Avenir',
-        paddingBottom: SPACING ,
-        fontWeight:"500"
+        paddingBottom: SPACING,
+        fontWeight: "500"
     },
     subdetail: {
-        width:'82%',
-        alignItems:'center',
+        width: '82%',
+        alignItems: 'center',
         flexDirection: 'row',
-        justifyContent:'space-between',
-     
-        
+        justifyContent: 'space-between',
     },
-    txtbtn:{
-        color:COLOR.purple,
-        textTransform:'uppercase'
+    txtbtn: {
+        color: COLOR.purple,
+        textTransform: 'uppercase'
     }
 });
 

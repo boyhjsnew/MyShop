@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import 'react-native-gesture-handler';
 import { View, Text, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,17 +14,18 @@ const Stack = createStackNavigator();
 
 // create a component
 
-const Home = () => {
 
-
+const Home = (props) => {
+  const {types} =props
+  
   return (
+    
     <NavigationContainer
       independent={true}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-       
         <Stack.Screen
-          name='HomeView'
-          component={HomeView}>
+          name='HomeView'>
+          {(props)=><HomeView {...props} types={types}></HomeView>}
         </Stack.Screen>
         <Stack.Screen
           name='ListProduct'
@@ -38,8 +39,6 @@ const Home = () => {
     </NavigationContainer>
   );
 };
-
-
 
 //make this component available to the app
 export default Home;

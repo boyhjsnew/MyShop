@@ -13,22 +13,17 @@ const { height, width } = Dimensions.get('window');
 
 // create a component
 const Category = (props) => {
-   
-    const [indexCategory, setIndexCategory] = useState(0);
-    const categorys = [
-        { 'id':"1",tittle: 'tittle 1', image: require('../../../../assets/category1.jpeg') },
-        { 'id':'2',titile: 'titile 2', image: require('../../../../assets/category2.jpeg') },
-        { 'id':'3',tittle: 'titile 3', image: require('../../../../assets/BannerColection.png') }
 
-    ]
+    const {types} =props ;
+    const [indexCategory, setIndexCategory] = useState(0);
+   
     const onChange = (nativeEvent) => {
         const slide = (Math.floor((nativeEvent.contentOffset.x + width / 2) / width))
         setIndexCategory(slide)
     }
-    const goToListProduct =()=>{
+    const goToListProduct = ()=>{
         return props.navigation.navigate("ListProduct")
     }
-
     return (
         <View style={{
             height: height * 0.3,
@@ -59,41 +54,37 @@ const Category = (props) => {
                     scrollEventThrottle={16}
                     onScroll={({ nativeEvent }) => { onChange(nativeEvent) }}
                     showsHorizontalScrollIndicator={false}
-                    pagingEnabled
-                    snapToInterval={width}
-                    contentContainerStyle={{ height: '100%', width: width * categorys.length }}
+                    snapToInterval={width -10}
+                    contentContainerStyle={{ height: '100%', width: width  * types.length  }}
                     horizontal>
-                    {categorys.map((category, index) =>
+                    {types.map((category, index) =>
                     <TouchableOpacity
                     onPress={goToListProduct}
                     key={category.id}
-                     style={{justifyContent:'center' ,alignItems:'center'}}>
+                     style={{justifyContent:'center',alignItems:'center'}}>
                         <Image
-                            style={{ width: width, height: '100%' }}
-                            
-                            source={category.image}>
+                            style={{ width: width - SPACING*1.9, height: '100%', resizeMode:'contain'}}
+                            source={{uri: `http://localhost:8080/api/images/type/${category.image}`}}>
                         </Image> 
                         <Text
-                        style={{position:'absolute',fontSize:SPACING *2,color:'gray', fontFamily:'Avenir', }}
-                      >{category.tittle}</Text>
+                        style={{position:'absolute',fontSize:SPACING *2,color:'gray', fontFamily:'Avenir' }}
+                      >{category.name}</Text>
                     </TouchableOpacity>
                         )}
                 </ScrollView>
 
 
                 <View style={{ position: 'absolute', flexDirection: 'row', padding: SPACING / 2, justifyContent: 'space-between', width: width / 9 }}>
-                    {categorys.map((item, index) =>
+                    {types.map((item, index) =>
                         <Text
                         key={index.toString()}
                             style={{
+                                paddingHorizontal:SPACING/4,
                                 fontSize: 7,
                                 color: index == indexCategory ? COLOR.primary : COLOR.white
                             }}>{'\u2B24'}</Text>)}
 
                 </View>
-
-
-
             </View>
         </View>
     );
