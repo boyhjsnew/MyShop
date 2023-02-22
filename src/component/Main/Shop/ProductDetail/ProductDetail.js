@@ -9,6 +9,7 @@ import { ColorSpace } from 'react-native-reanimated';
 import { ScrollView } from 'react-native-gesture-handler';
 import TopProduct from '../Home/TopProduct';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import global from '../../../global';
 const url ='http://localhost:8080/api/images/product/'
 // create a component
 const ProductDetail = () => {
@@ -16,8 +17,14 @@ const ProductDetail = () => {
     const navigation = useNavigation()
     const { container, wrapper, header, img, boxImg, textPrice, txtTittle, txtDes, txtPricre, boxMaterial, txtMaterial } = styles
     const { width } = Dimensions.get('window');
-    const {products} = route.params;
-
+    
+    const addToCart = ()=>{
+        global.addProductToCart(route.params.products)
+    }
+      
+        
+    
+    const {price, name, color, images ,material,description} = route.params.products;
     return (
         <View style={styles.container}>
             <View style={wrapper}>
@@ -25,7 +32,7 @@ const ProductDetail = () => {
                     <TouchableOpacity
                     onPress={()=>navigation.goBack()}
                     ><Ionicons name='chevron-back' size={SPACING * 3} color={COLOR.primary}></Ionicons></TouchableOpacity>
-                    <TouchableOpacity><Ionicons name='cart-outline' size={SPACING * 3} color={COLOR.primary}></Ionicons></TouchableOpacity>
+                    <TouchableOpacity onPress={addToCart}><Ionicons name='cart-outline' size={SPACING * 3} color={COLOR.primary}></Ionicons></TouchableOpacity>
                 </View>
                 <ScrollView
                     showsHorizontalScrollIndicator={false}
@@ -33,32 +40,31 @@ const ProductDetail = () => {
                     contentContainerStyle={{ height: '100%', width: width - SPACING }}
                     horizontal>
                     <View style={boxImg}>
-                    {products.images.map((image,index)=>(
+                    {images.map((image,index)=>(
                         <View key={index.toString()}>
                             <Image style={img} source={{uri:`${url}${image}`}}></Image>
                         </View>
                     ))}
-                      
                     </View>
                 </ScrollView>
                 {/* text price */}
                 <View style={textPrice}>
-                    <Text style={txtTittle}> BANK OF THE / </Text>
-                    <Text style={txtPricre}> {products.price}$</Text>
+                    <Text style={txtTittle}> {name} / </Text>
+                    <Text style={txtPricre}> {price}$</Text>
                     <View ></View>
                 </View>
                 {/* description */}
               
-                <Text style={txtDes} numberOfLines={5}> {products.description}
+                <Text style={txtDes} numberOfLines={5}> {description}
                 </Text>
             </View>
             {/* Metirial-color */}
             <View style={{flex:1,justifyContent:'center'}}>
                 <View style={boxMaterial}>
-                    <Text style={txtMaterial}>{products.material}</Text>
+                    <Text style={txtMaterial}>{material}</Text>
                     <View style={{flexDirection:'row'}}>
-                         <Text style={txtMaterial}>{products.color}</Text>
-                         <View style={{width:SPACING*1.5, height:SPACING*1.5, borderRadius:SPACING,backgroundColor:products.color.toLowerCase(),alignSelf:'center',borderWidth:2,borderColor:COLOR.gray}}></View>
+                         <Text style={txtMaterial}>{color}</Text>
+                         <View style={{width:SPACING*1.5, height:SPACING*1.5, borderRadius:SPACING,backgroundColor:color.toLowerCase(),alignSelf:'center',borderWidth:2,borderColor:COLOR.gray}}></View>
                     </View>
                     
                

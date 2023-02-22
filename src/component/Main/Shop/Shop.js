@@ -12,18 +12,23 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Header from './Header';
 import SPACING from '../../../config/SPACING';
 import COLOR from '../../../config/COLOR';
-import HomeView from './Home/HomeView';
+import global from '../../global';
+
+import saveData from '../../../Api/saveData';
+import getData from '../../../Api/getData';
+
 
 
 const Tab = createBottomTabNavigator();
-
-
 // create a component
 const Shop = ({navigation}) => {  
+  const [carts, setCarts] =useState([]);
   const [types , setTypes] = useState([]);
   const [topProducts, setTopProducts] =useState([])
+  
 
   //get categorys
+  
   const getTypesApiAsync = async () => {
     try {
       const response = await fetch(
@@ -35,23 +40,24 @@ const Shop = ({navigation}) => {
       console.error(error);
     }
   };
-  // const getTopProductApiAsync = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       'http://192.168.1.152:8080/api/',
-  //     );
-  //     const json = await response.json();
-  //     return setTopProducts(json.product) 
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   useEffect(()=>{
     getTypesApiAsync() ;
     // getTopProductApiAsync()
+
+  },[]);
+  useEffect(()=>{
+    getData().then(cart => setCarts(cart));
   },[])
-  
+  useEffect(()=>{
+    saveData(carts)
+  },[carts])
+
+   function addProductToCart(products){
+   setCarts(carts.concat({products:products , quantity:1}));
+
+  }
+  global.addProductToCart =addProductToCart ;
+ 
   const openDrawer = ()=> navigation.openDrawer(); 
     return (     
      
@@ -75,7 +81,7 @@ const Shop = ({navigation}) => {
          </Tab.Screen>  
        <Tab.Screen
         options={{
-          tabBarBadge: 2,
+          tabBarBadge: carts.length ==0 ? undefined :carts.length,
           tabBarBadgeStyle: {color:COLOR.white},
           tabBarIcon: (tabInfo)=>{
           return (
@@ -85,7 +91,10 @@ const Shop = ({navigation}) => {
             />
           )
         }}}
-         name="Cart" component={Cart} />
+         name="Cart" >
+         {(props)=><Cart {...props} carts= {carts}></Cart>}
+
+         </Tab.Screen>
           <Tab.Screen
         options={{
           tabBarIcon: (tabInfo)=>{
