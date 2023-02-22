@@ -7,19 +7,25 @@ import SPACING from '../../../../config/SPACING';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ColorSpace } from 'react-native-reanimated';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import TopProduct from '../Home/TopProduct';
+import { useNavigation, useRoute } from '@react-navigation/native';
+const url ='http://localhost:8080/api/images/product/'
 // create a component
-const ProductDetail = ({ navigation }) => {
-
+const ProductDetail = () => {
+    const route = useRoute()
+    const navigation = useNavigation()
     const { container, wrapper, header, img, boxImg, textPrice, txtTittle, txtDes, txtPricre, boxMaterial, txtMaterial } = styles
     const { width } = Dimensions.get('window');
+    const {products} = route.params;
+
     return (
         <View style={styles.container}>
             <View style={wrapper}>
                 <View style={header}>
-                    <Pressable onPress={() => alert('hello')}><Ionicons name='chevron-back' size={SPACING * 4} color={COLOR.primary}></Ionicons></Pressable>
-                    <Ionicons name='cart-outline' size={SPACING * 4} color={COLOR.primary}></Ionicons>
-
+                    <TouchableOpacity
+                    onPress={()=>navigation.goBack()}
+                    ><Ionicons name='chevron-back' size={SPACING * 3} color={COLOR.primary}></Ionicons></TouchableOpacity>
+                    <TouchableOpacity><Ionicons name='cart-outline' size={SPACING * 3} color={COLOR.primary}></Ionicons></TouchableOpacity>
                 </View>
                 <ScrollView
                     showsHorizontalScrollIndicator={false}
@@ -27,45 +33,37 @@ const ProductDetail = ({ navigation }) => {
                     contentContainerStyle={{ height: '100%', width: width - SPACING }}
                     horizontal>
                     <View style={boxImg}>
-                        <View>
-                            <Image style={img} source={require('../../../../assets/category1.jpeg')}></Image>
+                    {products.images.map((image,index)=>(
+                        <View key={index.toString()}>
+                            <Image style={img} source={{uri:`${url}${image}`}}></Image>
                         </View>
-                        <View >
-                            <Image style={img} source={require('../../../../assets/category1.jpeg')}></Image>
-                        </View>
-
+                    ))}
+                      
                     </View>
                 </ScrollView>
                 {/* text price */}
                 <View style={textPrice}>
                     <Text style={txtTittle}> BANK OF THE / </Text>
-                    <Text style={txtPricre}> 100$</Text>
+                    <Text style={txtPricre}> {products.price}$</Text>
                     <View ></View>
                 </View>
                 {/* description */}
               
-                <Text style={txtDes} numberOfLines={5}>sdghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdghdghsdgshdgshdgshdgshdghdghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdgh
-                dghsdgshdgshdgshdgshdgh
-
+                <Text style={txtDes} numberOfLines={5}> {products.description}
                 </Text>
-
-           
-               
             </View>
             {/* Metirial-color */}
             <View style={{flex:1,justifyContent:'center'}}>
                 <View style={boxMaterial}>
-                    <Text style={txtMaterial}>Material fur</Text>
-                    <Text style={txtMaterial}>Color fur</Text>
+                    <Text style={txtMaterial}>{products.material}</Text>
+                    <View style={{flexDirection:'row'}}>
+                         <Text style={txtMaterial}>{products.color}</Text>
+                         <View style={{width:SPACING*1.5, height:SPACING*1.5, borderRadius:SPACING,backgroundColor:products.color.toLowerCase(),alignSelf:'center',borderWidth:2,borderColor:COLOR.gray}}></View>
+                    </View>
+                    
+               
                 </View>
             </View>
-
 
         </View>
     );
@@ -122,7 +120,7 @@ const styles = StyleSheet.create({
     },
     txtDes: {
         fontWeight: '400',
-        paddingHorizontal: SPACING * 1.2,
+        paddingHorizontal: SPACING *1.3,
         paddingVertical: SPACING * 2,
         color: COLOR.gray,
     },
@@ -133,9 +131,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     txtMaterial:{
+        margin:SPACING/2,
         fontSize:SPACING*1.5,
         color:COLOR.purple,
         fontWeight:'500',
+        paddingRight:SPACING/2
     }
 });
 

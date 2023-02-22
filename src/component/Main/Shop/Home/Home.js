@@ -23,7 +23,6 @@ const Home = (props) => {
     <NavigationContainer
       independent={true}>
       <Stack.Navigator 
-      initialRouteName='ProductDetail'
       screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name='HomeView'>

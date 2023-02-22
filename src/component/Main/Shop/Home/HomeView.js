@@ -13,7 +13,6 @@ import { useNavigation } from '@react-navigation/native';
 const HomeView = (props) => {
   const navigation = useNavigation();
   const {types,topProducts}=props
-
     return (
         <ScrollView style={{backgroundColor:'#BDBDB8', flex:1 }}>
           <Collection/>

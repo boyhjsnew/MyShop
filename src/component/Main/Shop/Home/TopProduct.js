@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions , Image} from 'react-native';
 import SPACING from '../../../../config/SPACING';
 import COLOR  from '../../../../config/COLOR';
@@ -15,8 +15,11 @@ const url = 'http://localhost:8080/api/images/product/'
 const TopProduct = (props) => {
     const navigation =useNavigation() ;
     const {topProducts} = props
-    const goToProductDetail =()=>{
-        return navigation.navigate('ProductDetail');
+
+
+    const goToProductDetail =(product)=>{
+        return navigation.navigate("ProductDetail",{products:product})
+       
     }
     return (
         <View style={{ backgroundColor:COLOR.white, margin:SPACING, shadowColor:'black', shadowOffset:{width:0, height:3},
@@ -30,10 +33,10 @@ const TopProduct = (props) => {
             </View>
             <View style={{flexWrap:'wrap', flexDirection:'row', justifyContent:'space-around'}}>
              {/* row item */}
-             {topProducts.map(product=>(
+             {topProducts.map((product)=>(
                  <TouchableOpacity
                  key={product.id}
-                  onPress={goToProductDetail} style={{ width: width/2 -SPACING *4, backgroundColor:'white', shadowOpacity:0.2, marginBottom:SPACING*2}}>
+                  onPress={()=>goToProductDetail(product)} style={{ width: width/2 -SPACING *4, backgroundColor:'white', shadowOpacity:0.2, marginBottom:SPACING*2}}>
                     <Image
                     resizeMode='cover'
                     style={{width:'100%', height:((width/2 -40)/361)*452}}
