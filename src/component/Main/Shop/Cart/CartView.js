@@ -20,6 +20,11 @@ const CartView = (props) => {
     const { carts } = props;
     const { container, img, itemrow, info, nameitem, txtprice, btnQuantity, btnCheckNow, txtCheckout } = styles;
     const width = Dimensions.get('window').width;
+
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
     
 
     return (
@@ -29,7 +34,7 @@ const CartView = (props) => {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={carts}
-                    renderItem={({ item }) => (
+                    renderItem={({ item ,index}) => (
                         <View style={itemrow}>
                             <View style={img}>
                                 <Image style={{ width: "100%", height: '100%' }} source={{ uri: `${url}${item.products.images[0]}` }}></Image>
@@ -38,7 +43,7 @@ const CartView = (props) => {
                             <View style={info}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: width / 1.6 }}>
                                     <Text style={nameitem}>{item.products.name}</Text>
-                                    <TouchableOpacity onPress={()=> global.deleteCart(item.products.id)}>
+                                    <TouchableOpacity onPress={()=> global.deleteCart(index)}>
                                         <FontAwesome name='remove' color={COLOR.gray} size={SPACING * 1.7} ></FontAwesome>
                                     </TouchableOpacity>
 
@@ -60,7 +65,7 @@ const CartView = (props) => {
                                         <Text>{item.quantity}</Text>
                                         <TouchableOpacity style={btnQuantity}
                                             onPress={() => {
-                                                if (item.quantity > 0) {
+                                                if (item.quantity > 1) {
                                                     global.decrQuantity(item.products.id)
                                                 }
                                             }
@@ -88,7 +93,11 @@ const CartView = (props) => {
 
             {/* button buy */}
             <TouchableOpacity style={btnCheckNow}>
-                <Text style={txtCheckout}>Total  Checkout now</Text>
+                <Text style={txtCheckout}>Total {formatter.format(
+                    carts.reduce((total, item)=>{
+                    return total+item.products.price * item.quantity
+                },0)
+                )} Checkout now</Text>
             </TouchableOpacity>
         </View>
 

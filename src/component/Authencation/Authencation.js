@@ -1,14 +1,21 @@
 //import liraries
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import COLOR from '../../config/COLOR';
 import SPACING from '../../config/SPACING';
 import { TextInput } from 'react-native-gesture-handler';
+import Register from '../../Api/Register';
+import SignUp from './SignUp'
+import Login from './Login';
+
 
 // create a component
 const { width } = Dimensions.get('window');
+
 const Authencation = ({ navigation }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const backToMain = () => {
         return navigation.goBack();
     }
@@ -16,65 +23,14 @@ const Authencation = ({ navigation }) => {
     //State Login or Register 
     // true = SignIn , false =SignUp
     const [isSignIn, setIsSignIn] = useState(true);
-    const FormLogin = () => {
-        return <View>
-            {/* form login */}
-            <View style={formLogin}>
-                <TextInput
-                    style={edtEmail}
-                    placeholder='Enter your email'></TextInput>
-            </View>
-            <View style={formPassowrd}>
-                <TextInput
-                    secureTextEntry
-                    style={edtPassword}
-                    placeholder='Enter your password'></TextInput>
-            </View>
-            <TouchableOpacity style={btnSignInNow}>
-                <Text style={{ color: COLOR.white }}>SIGN IN NOW</Text>
-            </TouchableOpacity>
-            {/* form login */}
-        </View>
-    }
-    const FormRegister = () => {
-        return <View>
-            {/* form register */}
-            <View style={formLogin}>
-                <TextInput
-                    style={edtEmail}
-                    placeholder='Enter your name'></TextInput>
-            </View>
-            <View style={formPassowrd}>
-                <TextInput
-                    secureTextEntry
-                    style={edtPassword}
-                    placeholder='Enter your email'></TextInput>
-            </View>
-            <View style={formPassowrd}>
-                <TextInput
-                    secureTextEntry
-                    style={edtPassword}
-                    placeholder='Enter your password'></TextInput>
-            </View>
-            <View style={formPassowrd}>
-                <TextInput
-                    secureTextEntry
-                    style={edtPassword}
-                    placeholder='Confirm Password'></TextInput>
-            </View>
-            <TouchableOpacity style={btnSignInNow}>
-                <Text style={{ color: COLOR.white }}>SIGN UP NOW</Text>
-            </TouchableOpacity>
-            {/* form register */}
-
-        </View>
+    const getData = (data) => {
+        setEmail(data.email) ;
+        setPassword (data.password);
     }
 
+    
 
-
-
-
-    const { container, header, btnBack, txtHeader, formLogin, boxButton, btnSignIn, txtBtnActive, btnSignUp, txtSignUp, edtEmail, formPassowrd, edtPassword, form_btn, btnSignInNow ,txtBtnNoActive} = styles;
+    const { container, header, btnBack, txtHeader, formLogin, boxButton, btnSignIn, txtBtnActive, btnSignUp, txtSignUp, edtEmail, formPassowrd, edtPassword, form_btn, btnSignInNow, txtBtnNoActive } = styles;
     return (
         <View style={styles.container}>
             {/* Header */}
@@ -93,18 +49,18 @@ const Authencation = ({ navigation }) => {
             <View style={form_btn}>
                 <View style={{ flex: 1, justifyContent: 'center' }} >
                     {/* Login or Register */}
-                    {isSignIn ? <FormLogin/> : <FormRegister/>}
+                    {isSignIn ? <Login data= {{email, password}} /> : <SignUp setIsSignIn={setIsSignIn} passData={getData} />}
 
                 </View>
                 {/* button */}
                 <View style={boxButton}>
                     <TouchableOpacity style={btnSignIn}
-                    onPress={()=>setIsSignIn(!isSignIn)}>
-                        <Text style={ isSignIn ? txtBtnActive : txtBtnNoActive}>SIGN IN</Text>
+                        onPress={()=>setIsSignIn(!isSignIn)}>
+                        <Text style={isSignIn ? txtBtnActive : txtBtnNoActive}>SIGN IN</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignUp}
-                    onPress={()=>setIsSignIn(!isSignIn)}>
-                        <Text style={ isSignIn ?  txtBtnNoActive : txtBtnActive}>SIGN UP</Text>
+                        onPress={() => setIsSignIn(!isSignIn)}>
+                        <Text style={isSignIn ? txtBtnNoActive : txtBtnActive}>SIGN UP</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -152,14 +108,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir'
     },
     txtBtnActive: {
-        fontWeight:'500',
+        fontWeight: '500',
         color: COLOR.primary
-        
+
     },
     txtBtnNoActive: {
         color: 'gray',
-        fontWeight:'500',
-        
+        fontWeight: '500',
+
     },
     btnSignUp: {
         flex: 1,

@@ -65,7 +65,7 @@ const Shop = ({ navigation }) => {
     const newCartArr = carts.map(e => {
       if (e.products.id !== productID) { return e }
       // else  return {products :e.products , quantity : e.quantity +1}
-      return { products: e.products, quantity: e.quantity + 1 }
+      return {  products: e.products, quantity: e.quantity + 1 }
     })
     setCarts(newCartArr);
   }
@@ -78,9 +78,9 @@ const Shop = ({ navigation }) => {
     })
     setCarts(newCartArr)
   };
-  const deleteCart = (productID) => {
-    const newCartArr = carts.filter(e => {
-      return e.products.id !== productID
+  const deleteCart = (indexCart) => {
+    const newCartArr = carts.filter((e, index)=> {
+      return indexCart !== index;
     })
     setCarts(newCartArr)
   }

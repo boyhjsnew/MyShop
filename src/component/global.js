@@ -1,4 +1,4 @@
-exports={
+export default{
     //method 
     addProductToCart : null , 
     incrQuantity: null ,
