@@ -5,9 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       if (value !== null) {
         return JSON.parse(value) ;
       }
+      return []
     } catch (error) {
       return [] ;
     }
   };
-
   export default  getData 

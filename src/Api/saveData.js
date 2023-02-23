@@ -4,7 +4,7 @@ const saveData = async (carts) => {
         await AsyncStorage.setItem("@cart", JSON.stringify(carts));
 
     } catch (error) {
-        alert(error)
+        console.log(error);
     }
 }
 export default saveData

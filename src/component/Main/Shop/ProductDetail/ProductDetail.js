@@ -22,8 +22,6 @@ const ProductDetail = () => {
         global.addProductToCart(route.params.products)
     }
       
-        
-    
     const {price, name, color, images ,material,description} = route.params.products;
     return (
         <View style={styles.container}>
