@@ -3,33 +3,41 @@ import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 import SPACING from '../../config/SPACING';
 import COLOR from '../../config/COLOR';
-
+import SignIn from '../../Api/SignIn'
+import global from '../global';
+import { useNavigation } from '@react-navigation/native';
 
 // create a component
 
 const Login = (props) => {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-
-   
+    const navigation = useNavigation()
+    const [email, setEmail] = useState(props.data.email);
+    const [password, setPassword] = useState(props.data.password);
     const {  formLogin,  edtEmail, formPassowrd, edtPassword, btnSignInNow } = styles;
+    const Login = ()=>(
+        SignIn(email ,password).then( res=>global.onSignIn(res.user) ,navigation.goBack() ).catch(e =>  alert('sai'))
+    )
+
     return (
         <View>
             {/* form login */}
             <View style={formLogin}>
                 <TextInput
+                    onChangeText={setEmail}
                     defaultValue={props.data.email}
                     style={edtEmail}
                     placeholder='Enter your email'></TextInput>
             </View>
             <View style={formPassowrd}>
                 <TextInput
+                    onChangeText={setPassword}
                     defaultValue={props.data.password}
                     secureTextEntry
                     style={edtPassword}
                     placeholder='Enter your password'></TextInput>
             </View>
-            <TouchableOpacity style={btnSignInNow}>
+            <TouchableOpacity style={btnSignInNow}
+            onPress={Login}>
                 <Text style={{ color: COLOR.white }}>SIGN IN NOW</Text>
             </TouchableOpacity>
             {/* form login */}

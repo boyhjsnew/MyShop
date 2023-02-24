@@ -10,7 +10,6 @@ import Register from '../../Api/Register';
 
 const SignUp = (props ) => {
     const {setIsSignIn} =props
-    const [complete , setComplete] = useState(false)
     const [name ,setName] =useState('') ;
     const [email ,setEmail]= useState('');
     const [password ,setPassword]= useState('');

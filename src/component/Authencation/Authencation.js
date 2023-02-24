@@ -9,7 +9,6 @@ import Register from '../../Api/Register';
 import SignUp from './SignUp'
 import Login from './Login';
 
-
 // create a component
 const { width } = Dimensions.get('window');
 
@@ -27,10 +26,10 @@ const Authencation = ({ navigation }) => {
         setEmail(data.email) ;
         setPassword (data.password);
     }
-
     
+   
 
-    const { container, header, btnBack, txtHeader, formLogin, boxButton, btnSignIn, txtBtnActive, btnSignUp, txtSignUp, edtEmail, formPassowrd, edtPassword, form_btn, btnSignInNow, txtBtnNoActive } = styles;
+    const { container, header, btnBack, txtHeader,  boxButton, btnSignIn, txtBtnActive, btnSignUp,  form_btn,txtBtnNoActive } = styles;
     return (
         <View style={styles.container}>
             {/* Header */}

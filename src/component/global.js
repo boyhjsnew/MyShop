@@ -4,4 +4,5 @@ export default{
     incrQuantity: null ,
     decrQuantity: null ,
     deleteCart: null,
+    onSignIn:null 
 };

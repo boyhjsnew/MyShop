@@ -14,7 +14,7 @@ import COLOR from '../../config/COLOR';
 const Drawer = createDrawerNavigator();
 // create a component
 const Main = () => {
-   
+  
     return (
       <SafeAreaView style={{flex:1}}>
            <NavigationContainer independent={true}>

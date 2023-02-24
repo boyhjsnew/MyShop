@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import COLOR from '../../config/COLOR';
 import SPACING from '../../config/SPACING';
+import global from '../global';
 
 
 const { width, height } = Dimensions.get('window');
@@ -23,7 +24,12 @@ const Menu = ({ navigation }) => {
   }
 
   // state login
-  const [isLogin, setIsLogin]= useState(false);
+  const [name , setName] =useState('')
+  const onSignIn = (user)=>{
+    return  setName(user.name)
+}
+global.onSignIn=onSignIn
+
   const SIGN_IN = () =>
     <View>
       <TouchableOpacity style={btnSignIn}
@@ -32,7 +38,7 @@ const Menu = ({ navigation }) => {
       </TouchableOpacity>
     </View>
   const LOGGED = () => <View style={contenForLogin}>
-    <Text style={txtUsername}>Le Phuoc Thanh</Text>
+    <Text style={txtUsername}>{name ? name : 'null'}</Text>
     <View>
       <TouchableOpacity style={btnForLogin}
       onPress={goToOrderHistory}>
@@ -42,7 +48,8 @@ const Menu = ({ navigation }) => {
       onPress={goToChangeInfo}>
         <Text style={btnTextForLogin}>Change Info</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={btnForLogin}>
+      <TouchableOpacity style={btnForLogin}
+      onPress={()=>setName('')}>
         <Text style={btnTextForLogin}>Sign Out</Text>
       </TouchableOpacity>
     </View>
@@ -57,7 +64,7 @@ const Menu = ({ navigation }) => {
         style={Img}
         source={require('../../assets/user.png')}></Image>
         {/* SING_IN or LOGGED */}
-       {isLogin ? <LOGGED/> : <SIGN_IN/>}
+       {name ? <LOGGED/> : <SIGN_IN/>}
     </View>
   );
 };

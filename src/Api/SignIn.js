@@ -1,15 +1,14 @@
-const Register = (name ,email,password) =>(
-    fetch('http://localhost:8080/api/register.php', {
+const SignIn = (email ,password)=>(
+    fetch('http://localhost:8080/api/login.php',{
         method :"POST" ,
         headers : {
             Accept : 'application/json', 
             'Content-Type': 'application.js'
         },
         body : JSON.stringify({
-            name ,
             email,
             password
         })
-    }).then(res=>(res.text()))
+    }).then(res => res.json())
 )
-export default Register
+export default SignIn ;
