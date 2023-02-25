@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import saveToken from '../../Api/saveToken';
 import COLOR from '../../config/COLOR';
 import SPACING from '../../config/SPACING';
 import global from '../global';
@@ -29,6 +30,10 @@ const Menu = ({ navigation }) => {
     return  setName(user.name)
 }
 global.onSignIn=onSignIn
+const signOut = ()=>{
+  saveToken('') ;
+  setName('')
+}
 
   const SIGN_IN = () =>
     <View>
@@ -49,7 +54,7 @@ global.onSignIn=onSignIn
         <Text style={btnTextForLogin}>Change Info</Text>
       </TouchableOpacity>
       <TouchableOpacity style={btnForLogin}
-      onPress={()=>setName('')}>
+      onPress={signOut}>
         <Text style={btnTextForLogin}>Sign Out</Text>
       </TouchableOpacity>
     </View>

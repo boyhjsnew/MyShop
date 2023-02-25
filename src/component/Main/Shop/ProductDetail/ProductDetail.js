@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import TopProduct from '../Home/TopProduct';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import global from '../../../global';
-const url ='http://localhost:8080/api/images/product/'
+const url ='http://192.168.1.152:8080/api/images/product/'
 // create a component
 const ProductDetail = () => {
     const route = useRoute()

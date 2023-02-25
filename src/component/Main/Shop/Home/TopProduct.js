@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const {width, height } =Dimensions.get('window') ;
 
-const url = 'http://localhost:8080/api/images/product/'
+const url = 'http://192.168.1.152:8080/api/images/product/'
 
 // create a component
 const TopProduct = (props) => {

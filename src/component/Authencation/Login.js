@@ -6,6 +6,8 @@ import COLOR from '../../config/COLOR';
 import SignIn from '../../Api/SignIn'
 import global from '../global';
 import { useNavigation } from '@react-navigation/native';
+import saveToken from '../../Api/saveToken';
+import getToken from '../../Api/getToken';
 
 // create a component
 
@@ -15,23 +17,25 @@ const Login = (props) => {
     const [password, setPassword] = useState(props.data.password);
     const {  formLogin,  edtEmail, formPassowrd, edtPassword, btnSignInNow } = styles;
     const Login = ()=>(
-        SignIn(email ,password).then( res=>global.onSignIn(res.user) ,navigation.goBack() ).catch(e =>  alert('sai'))
+        SignIn(email ,password).
+        then(res=>{
+            global.onSignIn(res.user);
+            saveToken(res.token) ;
+            navigation.goBack()
+        }).catch(e =>  alert('sai')) 
     )
-
     return (
         <View>
             {/* form login */}
             <View style={formLogin}>
                 <TextInput
                     onChangeText={setEmail}
-                    defaultValue={props.data.email}
                     style={edtEmail}
                     placeholder='Enter your email'></TextInput>
             </View>
             <View style={formPassowrd}>
                 <TextInput
                     onChangeText={setPassword}
-                    defaultValue={props.data.password}
                     secureTextEntry
                     style={edtPassword}
                     placeholder='Enter your password'></TextInput>

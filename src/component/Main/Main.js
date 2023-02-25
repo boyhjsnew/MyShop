@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import Menu from './Menu';
 import Shop from './Shop/Shop';
@@ -10,11 +10,21 @@ import Authencation from '../Authencation/Authencation';
 import Changeinfo from '../ChangeInfo/Changinfo';
 import OrderHistory from '../OrderHistory/OrderHistory';
 import COLOR from '../../config/COLOR';
+import checkLogin from '../../Api/checkLogin';
+import getToken from '../../Api/getToken'
+import global from '../global';
 
 const Drawer = createDrawerNavigator();
 // create a component
 const Main = () => {
-  
+
+  useEffect(()=>{
+    getToken().
+    then(token => checkLogin(token)).
+    then(res => global.onSignIn(res.user)).
+    catch(e => console.log(e));
+    
+  },[])
     return (
       <SafeAreaView style={{flex:1}}>
            <NavigationContainer independent={true}>

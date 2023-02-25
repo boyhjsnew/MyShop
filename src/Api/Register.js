@@ -1,5 +1,5 @@
 const Register = (name ,email,password) =>(
-    fetch('http://localhost:8080/api/register.php', {
+    fetch('http://192.168.1.152:8080/api/register.php', {
         method :"POST" ,
         headers : {
             Accept : 'application/json', 

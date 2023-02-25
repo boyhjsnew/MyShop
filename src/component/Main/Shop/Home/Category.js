@@ -64,7 +64,7 @@ const Category = (props) => {
                      style={{justifyContent:'center',alignItems:'center'}}>
                         <Image
                             style={{ width: width - SPACING*1.9, height: '100%', resizeMode:'contain'}}
-                            source={{uri: `http://localhost:8080/api/images/type/${category.image}`}}>
+                            source={{uri: `http://192.168.1.152:8080/api/images/type/${category.image}`}}>
                         </Image> 
                         <Text
                         style={{position:'absolute',fontSize:SPACING *2,color:'gray', fontFamily:'Avenir' }}

@@ -16,7 +16,7 @@ const CartView = (props) => {
     const goToitemDetail = () => {
         return navigation.navigate("itemDetail")
     }
-    const url = 'http://localhost:8080/api/images/product/'
+    const url = 'http://192.168.1.152:8080/api/images/product/'
     const { carts } = props;
     const { container, img, itemrow, info, nameitem, txtprice, btnQuantity, btnCheckNow, txtCheckout } = styles;
     const width = Dimensions.get('window').width;

@@ -17,6 +17,7 @@ import global from '../../global';
 import saveData from '../../../Api/saveData';
 import getData from '../../../Api/getData';
 import { Value } from 'react-native-reanimated';
+import getToken from '../../../Api/getToken';
 
 
 
@@ -48,10 +49,14 @@ const Shop = ({ navigation }) => {
     // getTopProductApiAsync()
   }, []);
 
+  useEffect(()=>{
+    getToken
+  },[])
+
   useEffect(() => {
     getData().then((value) => setCarts(value)).catch(() => setCarts([]))
   }, [])
-
+  
   useEffect(() => {
     saveData(carts)
 
