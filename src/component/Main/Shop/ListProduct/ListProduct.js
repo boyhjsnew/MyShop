@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import SPACING from '../../../../config/SPACING'
 import COLOR from '../../../../config/COLOR'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -57,54 +57,8 @@ const ListProduct = ({ navigation }) => {
                         </View>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={viewitem}>
-                        <View style={rowitem}>
-                            {/* Image */}
-                            <View style={img}>
-                                <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
-                            </View>
-                            {/* info product */}
-                            <View style={infoproduct}>
-                                <Text style={nameproduct}>Lace Sleeve Si</Text>
-                                <Text style={priceproduct}>117$</Text>
-                                <Text style={materialproduct}>Matirial silk</Text>
-                                {/* color - btn show detaild */}
-                                <View style={subdetail}>
-                                    <Text>Color RoyalBlue</Text>
-                                    <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
-                                    <TouchableOpacity>
-                                        <Text style={txtbtn}>Show Details</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={viewitem}>
-                        <View style={rowitem}>
-                            {/* Image */}
-                            <View style={img}>
-                                <Image style={{ width: '100%', height: '100%' }} resizeMode='stretch' source={require('../../../../assets/category1.jpeg')}></Image>
-                            </View>
-                            {/* info product */}
-                            <View style={infoproduct}>
-                                <Text style={nameproduct}>Lace Sleeve Si</Text>
-                                <Text style={priceproduct}>117$</Text>
-                                <Text style={materialproduct}>Matirial silk</Text>
-                                {/* color - btn show detaild */}
-                                <View style={subdetail}>
-                                    <Text>Color RoyalBlue</Text>
-                                    <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: COLOR.purple }}></View>
-                                    <TouchableOpacity>
-                                        <Text style={txtbtn}>Show Details</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                </TouchableOpacity>
+               
+               
             </ScrollView>
         </View>
     );

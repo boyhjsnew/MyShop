@@ -13,32 +13,35 @@ const { width, height } = Dimensions.get('window');
 
 // create a component
 const Menu = ({ navigation }) => {
+  const [userOb, setUserOb] = useState();
 
   const goToAuthencation = () => {
     return navigation.navigate("Authencation");
   }
   const goToChangeInfo = () => {
-    return navigation.navigate("Changeinfo");
+    return navigation.navigate("Changeinfo", { user: userOb });
   }
   const goToOrderHistory = () => {
     return navigation.navigate("OrderHistory");
   }
 
   // state login
-  const [name , setName] =useState('')
-  const onSignIn = (user)=>{
-    return  setName(user.name)
-}
-global.onSignIn=onSignIn
-const signOut = ()=>{
-  saveToken('') ;
-  setName('')
-}
+  const [name, setName] = useState('')
+  const onSignIn = (user) => {
+    return setName(user.name),
+      setUserOb(user)
+  }
+  global.onSignIn = onSignIn
+  
+  const signOut = () => {
+    saveToken('');
+    setName('');
+  }
 
   const SIGN_IN = () =>
     <View>
       <TouchableOpacity style={btnSignIn}
-      onPress={goToAuthencation}>
+        onPress={goToAuthencation}>
         <Text style={btnText}>sign in</Text>
       </TouchableOpacity>
     </View>
@@ -46,15 +49,15 @@ const signOut = ()=>{
     <Text style={txtUsername}>{name ? name : 'null'}</Text>
     <View>
       <TouchableOpacity style={btnForLogin}
-      onPress={goToOrderHistory}>
+        onPress={goToOrderHistory}>
         <Text style={btnTextForLogin}>Order History</Text>
       </TouchableOpacity>
       <TouchableOpacity style={btnForLogin}
-      onPress={goToChangeInfo}>
+        onPress={goToChangeInfo}>
         <Text style={btnTextForLogin}>Change Info</Text>
       </TouchableOpacity>
       <TouchableOpacity style={btnForLogin}
-      onPress={signOut}>
+        onPress={signOut}>
         <Text style={btnTextForLogin}>Sign Out</Text>
       </TouchableOpacity>
     </View>
@@ -68,8 +71,8 @@ const signOut = ()=>{
       <Image
         style={Img}
         source={require('../../assets/user.png')}></Image>
-        {/* SING_IN or LOGGED */}
-       {name ? <LOGGED/> : <SIGN_IN/>}
+      {/* SING_IN or LOGGED */}
+      {name ? <LOGGED /> : <SIGN_IN />}
     </View>
   );
 };
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  Img:{
+  Img: {
     width: 80,
     height: 80,
     borderRadius: 40,

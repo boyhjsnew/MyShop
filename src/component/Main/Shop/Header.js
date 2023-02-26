@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../../../config/COLOR';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SPACING from '../../../config/SPACING';
+import COLOR from '../../../config/COLOR';
 
 
 
@@ -35,8 +36,9 @@ const Header = (props) => {
                             paddingHorizontal:SPACING *2.3,
                             marginTop:SPACING/3,
                             height: height/23,
-                            backgroundColor: COLORS.white
+                            backgroundColor: COLORS.white,
                         }}
+                        placeholderTextColor={COLOR.gray}
                         placeholder='What do you want to buy ?'
                         >
                     </TextInput>
