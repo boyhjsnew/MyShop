@@ -27,8 +27,6 @@ const Authencation = ({ navigation }) => {
         setPassword (data.password);
     }
     
-   
-
     const { container, header, btnBack, txtHeader,  boxButton, btnSignIn, txtBtnActive, btnSignUp,  form_btn,txtBtnNoActive } = styles;
     return (
         <View style={styles.container}>

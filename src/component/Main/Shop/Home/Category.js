@@ -21,8 +21,8 @@ const Category = (props) => {
         const slide = (Math.floor((nativeEvent.contentOffset.x + width / 2) / width))
         setIndexCategory(slide)
     }
-    const goToListProduct = ()=>{
-        return props.navigation.navigate("ListProduct")
+    const goToListProduct = (category)=>{
+        return props.navigation.navigate("ListProduct", {types :category })
     }
     return (
         <View style={{
@@ -57,9 +57,9 @@ const Category = (props) => {
                     snapToInterval={width -10}
                     contentContainerStyle={{ height: '100%', width: width  * types.length  }}
                     horizontal>
-                    {types.map((category, index) =>
+                    {types.map((category) =>
                     <TouchableOpacity
-                    onPress={goToListProduct}
+                    onPress={()=>goToListProduct(category)}
                     key={category.id}
                      style={{justifyContent:'center',alignItems:'center'}}>
                         <Image

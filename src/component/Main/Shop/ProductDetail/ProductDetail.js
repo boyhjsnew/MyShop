@@ -17,7 +17,7 @@ const ProductDetail = () => {
     const navigation = useNavigation()
     const { container, wrapper, header, img, boxImg, textPrice, txtTittle, txtDes, txtPricre, boxMaterial, txtMaterial } = styles
     const { width } = Dimensions.get('window');
-    
+
     const addToCart = ()=>{
         global.addProductToCart(route.params.products)
     }
@@ -33,13 +33,15 @@ const ProductDetail = () => {
                     <TouchableOpacity onPress={addToCart}><Ionicons name='cart-outline' size={SPACING * 3} color={COLOR.primary}></Ionicons></TouchableOpacity>
                 </View>
                 <ScrollView
+                    pagingEnabled={true}
                     showsHorizontalScrollIndicator={false}
                     snapToInterval={width}
-                    contentContainerStyle={{ height: '100%', width: width - SPACING }}
+                    contentContainerStyle={{ height: '100%', width: width   }}
                     horizontal>
                     <View style={boxImg}>
                     {images.map((image,index)=>(
                         <View key={index.toString()}>
+                            
                             <Image style={img} source={{uri:`${url}${image}`}}></Image>
                         </View>
                     ))}
@@ -92,13 +94,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     img: {
-        margin: SPACING / 1.5,
-        width: 155,
-        height: 240,
+        marginRight:10,
+      
+        width: 180,
+        height: 250,
     },
 
     boxImg: {
-        flex: 1,
         paddingHorizontal: SPACING,
         alignItems: 'center',
         flexDirection: 'row',
