@@ -8,14 +8,16 @@ import SPACING from '../../../../config/SPACING';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import global from '../../../global'
+import SendOrder from '../../../../Api/SendOrder';
 
 // create a component
 const CartView = (props) => {
 
     const navigation = useNavigation();
-    const goToitemDetail = () => {
-        return navigation.navigate("itemDetail")
+    const goToitemDetail = (item) => {
+        return navigation.navigate("ProductDetail", {products :item})
     }
+    const [isCheckOut, setIsCheckOut] = useState(false)
     const url = 'http://192.168.1.152:8080/api/images/product/'
     const { carts } = props;
     const { container, img, itemrow, info, nameitem, txtprice, btnQuantity, btnCheckNow, txtCheckout } = styles;
@@ -26,12 +28,24 @@ const CartView = (props) => {
         currency: 'USD',
       });
     
+    const checkOut = async ()=>{
+        if(carts.length <=0){
+            alert('Cart Is Null')
+        }
+        else {
+            SendOrder().then(res =>{
+                if(res =='THEM_THANH_CONG'){
 
+                }
+            })
+        }
+    }
     return (
         <View style={styles.container}>
             {/* item cart */}
             <View style={{ flex: 9, marginHorizontal: SPACING * 1.5, marginTop: SPACING }}>
                 <FlatList
+                    extraData={isCheckOut}
                     showsVerticalScrollIndicator={false}
                     data={carts}
                     renderItem={({ item ,index}) => (
@@ -75,7 +89,8 @@ const CartView = (props) => {
                                     </View>
                                     {/* show detaild */}
                                     <View style={{ flex: 2, alignItems: 'flex-end' }}>
-                                        <TouchableOpacity  >
+                                        <TouchableOpacity 
+                                        onPress={()=>goToitemDetail(item.products)} >
                                             <Text style={{ color: COLOR.purple }}>SHOW DETAILS</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -92,7 +107,8 @@ const CartView = (props) => {
             </View>
 
             {/* button buy */}
-            <TouchableOpacity style={btnCheckNow}>
+            <TouchableOpacity style={btnCheckNow}
+            onPress={checkOut}>
                 <Text style={txtCheckout}>Total {formatter.format(
                     carts.reduce((total, item)=>{
                     return total+item.products.price * item.quantity

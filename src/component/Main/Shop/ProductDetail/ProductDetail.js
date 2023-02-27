@@ -4,12 +4,10 @@ import { View, Text, StyleSheet, TouchableOpacity,  Image, Dimensions,  } from '
 import COLOR from '../../../../config/COLOR';
 import SPACING from '../../../../config/SPACING';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { ColorSpace } from 'react-native-reanimated';
 import { ScrollView } from 'react-native-gesture-handler';
-import TopProduct from '../Home/TopProduct';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import global from '../../../global';
-import getData from '../../../../Api/getData';
+
 const url ='http://192.168.1.152:8080/api/images/product/'
 // create a component
 const ProductDetail = () => {

@@ -13,6 +13,7 @@ import COLOR from '../../config/COLOR';
 import checkLogin from '../../Api/checkLogin';
 import getToken from '../../Api/getToken'
 import global from '../global';
+import SendOrder from '../../Api/SendOrder';
 
 const Drawer = createDrawerNavigator();
 // create a component
@@ -23,6 +24,7 @@ const Main = () => {
       then(res => global.onSignIn(res.user)).
       catch(e => console.log(e));
   }, [])
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer independent={true}>

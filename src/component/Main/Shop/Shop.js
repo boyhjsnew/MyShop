@@ -55,11 +55,20 @@ const Shop = ({ navigation }) => {
   
   useEffect(() => {
     saveData(carts)
-
   }, [carts])
 
-  const addProductToCart = (products) => {
-       setCarts(carts.concat({ products: products, quantity: 1 }));
+  const addProductToCart =  async (products) => {
+    const getdata = await getData().then(value => value)
+    const dataCheck = await getdata.find(data=>{
+      return data.products.id === products.id
+    })
+    if(dataCheck){
+        alert("Product is Existed")
+    }
+    else{
+      setCarts(carts.concat({ products: products, quantity: 1 }));
+    }
+    
   }
   const incrQuantity = (productID) => {
     const newCartArr = carts.map(e => {
