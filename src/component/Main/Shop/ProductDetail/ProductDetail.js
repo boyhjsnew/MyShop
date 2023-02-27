@@ -1,7 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Pressable, Image, Dimensions, ViewBase } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity,  Image, Dimensions,  } from 'react-native';
 import COLOR from '../../../../config/COLOR';
 import SPACING from '../../../../config/SPACING';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -10,6 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import TopProduct from '../Home/TopProduct';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import global from '../../../global';
+import getData from '../../../../Api/getData';
 const url ='http://192.168.1.152:8080/api/images/product/'
 // create a component
 const ProductDetail = () => {
@@ -17,11 +17,9 @@ const ProductDetail = () => {
     const navigation = useNavigation()
     const { container, wrapper, header, img, boxImg, textPrice, txtTittle, txtDes, txtPricre, boxMaterial, txtMaterial } = styles
     const { width } = Dimensions.get('window');
-
     const addToCart = ()=>{
         global.addProductToCart(route.params.products)
     }
-      
     const {price, name, color, images ,material,description} = route.params.products;
     return (
         <View style={styles.container}>
@@ -49,7 +47,7 @@ const ProductDetail = () => {
                 </ScrollView>
                 {/* text price */}
                 <View style={textPrice}>
-                    <Text style={txtTittle}> {name} / </Text>
+                    <Text style={txtTittle}> {global.jsUcfirst(name)} / </Text>
                     <Text style={txtPricre}> {price}$</Text>
                     <View ></View>
                 </View>

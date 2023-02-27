@@ -4,5 +4,10 @@ export default{
     incrQuantity: null ,
     decrQuantity: null ,
     deleteCart: null,
-    onSignIn:null 
+    onSignIn:null , 
+    jsUcfirst: function jsUcfirst(string) {
+        return string.replace(/\b[a-z]/g, (x) => x.toUpperCase())
+    },
+    clickSearch :null,
+    find:null,
 };

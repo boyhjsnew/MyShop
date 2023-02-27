@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,12 +7,14 @@ import COLORS from '../../../config/COLOR';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SPACING from '../../../config/SPACING';
 import COLOR from '../../../config/COLOR';
-
+import global from '../../global';
 
 
 // create a component
 const Header = (props) => {
+    const [inputtext ,setinputtext] =useState('')
     
+  
     const { height, width } = Dimensions.get('window');
     return (
         <View style={{ height: height / 8, backgroundColor: COLORS.primary }}>
@@ -31,15 +33,21 @@ const Header = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TextInput
+                    <TextInput 
+                    onPressIn={global.clickSearch}
                         style={{
                             paddingHorizontal:SPACING *2.3,
                             marginTop:SPACING/3,
                             height: height/23,
                             backgroundColor: COLORS.white,
                         }}
+                        value={inputtext}
+                        onChangeText={setinputtext}
                         placeholderTextColor={COLOR.gray}
                         placeholder='What do you want to buy ?'
+                        onSubmitEditing={()=>{
+                            setinputtext('')
+                            global.find(inputtext)}}
                         >
                     </TextInput>
                 </View>

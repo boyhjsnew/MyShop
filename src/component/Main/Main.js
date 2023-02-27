@@ -17,37 +17,33 @@ import global from '../global';
 const Drawer = createDrawerNavigator();
 // create a component
 const Main = () => {
-
-  useEffect(()=>{
+  useEffect(() => {
     getToken().
-    then(token => checkLogin(token)).
-    then(res => global.onSignIn(res.user)).
-    catch(e => console.log(e));
-    
-  },[])
-    return (
-      <SafeAreaView style={{flex:1}}>
-           <NavigationContainer independent={true}>
-            <Drawer.Navigator
-          
-            drawerContent={({navigation})=>{
-                return <Menu navigation={navigation}/>
-            }}
-            screenOptions={{headerShown:false,}}>
-             <Drawer.Screen name="Shop" component={Shop}>
-                </Drawer.Screen>
-                <Drawer.Screen
-                name="Authencation" component={Authencation}>
-                </Drawer.Screen>
-                <Drawer.Screen name="Changeinfo" component={Changeinfo}>
-                </Drawer.Screen>
-                <Drawer.Screen name="OrderHistory" component={OrderHistory}>
-                </Drawer.Screen>
-            </Drawer.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
-     
-    );
+      then(token => checkLogin(token)).
+      then(res => global.onSignIn(res.user)).
+      catch(e => console.log(e));
+  }, [])
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer independent={true}>
+        <Drawer.Navigator
+          drawerContent={({ navigation }) => {
+            return <Menu navigation={navigation} />
+          }}
+          screenOptions={{ headerShown: false, }}>
+          <Drawer.Screen name="Shop" component={Shop}>
+          </Drawer.Screen>
+          <Drawer.Screen
+            name="Authencation" component={Authencation}>
+          </Drawer.Screen>
+          <Drawer.Screen name="Changeinfo" component={Changeinfo}>
+          </Drawer.Screen>
+          <Drawer.Screen name="OrderHistory" component={OrderHistory}>
+          </Drawer.Screen>
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
+  );
 };
 
 // define your styles

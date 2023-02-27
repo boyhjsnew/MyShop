@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, RefreshControl, ActivityIndicator } from 'react-native';
 import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import SPACING from '../../../../config/SPACING'
 import COLOR from '../../../../config/COLOR'
@@ -8,10 +8,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { color } from 'react-native-reanimated';
 import getProductList from '../../../../Api/getProductList';
+import global from '../../../global';
 
 // create a component
 const ListProduct = ({ navigation, route }) => {
 
+    const [productList, setProductList] = useState([]);
+    const [isRefresh, setIsRefresh] = useState(false)
+    const [page , setPage] =useState(1)
     const { container, header, wrapper, headerContent, txtNameCategory
         , viewitem, rowitem, img, infoproduct, nameproduct, priceproduct,
         materialproduct, subdetail, txtbtn
@@ -19,15 +23,22 @@ const ListProduct = ({ navigation, route }) => {
     const { name, id } = route.params.types
 
     useEffect(() => {
-        getProductList(id, 2).then(arrProduct => { setProductList(arrProduct) }).catch(e => console.log(e))
-
-    }, [])
-    const [productList, setProductList] = useState([]);
-
+        setIsRefresh(true)
+        getProductList(id, page).then(arrProduct => {
+             setProductList([...productList, ...arrProduct])
+             setIsRefresh(false)
+            }).catch(e => setIsRefresh(false))
+    }, [page])
+ 
+     
+    const loadMore =()=>{ 
+        setPage(page+1)
+    
+    }
     return (
-
         <View style={container}>
             <View style={wrapper}>
+
                 {/* header */}
                 <View style={header}>
                     <View style={headerContent}>
@@ -43,11 +54,20 @@ const ListProduct = ({ navigation, route }) => {
                     </View>
                 </View>
                 {/* row item */}
+                {isRefresh &&<ActivityIndicator ActivityIndicator size={'large'} color={COLOR.primary} style={{
+                    position: 'absolute',
+                    bottom:-SPACING*2,
+                    zIndex:1,
+                    alignSelf:'center',
+                    marginBottom: SPACING * 2
+                }}></ActivityIndicator>}
                 <FlatList
                     data={productList}
-                    renderItem={({ item,index }) => (
-                        <TouchableOpacity
-                        key={index.toString()}>
+                    onEndReachedThreshold={0}
+                    onEndReached={loadMore}
+                    keyExtractor={(item, index) => 'key'+index}
+                    renderItem={({ item, index }) => (
+                        <TouchableOpacity>
                             <View style={viewitem}>
                                 <View style={rowitem}>
                                     {/* Image */}
@@ -56,24 +76,24 @@ const ListProduct = ({ navigation, route }) => {
                                     </View>
                                     {/* info product */}
                                     <View style={infoproduct}>
-                                        <Text style={nameproduct}>{item.name}</Text>
-                                        <Text style={priceproduct}>{item.price}</Text>
+                                        <Text style={nameproduct}>{global.jsUcfirst(item.name)}</Text>
+                                        <Text style={priceproduct}>${item.price} </Text>
                                         <Text style={materialproduct}>{item.material}</Text>
                                         {/* color - btn show detaild */}
                                         <View style={subdetail}>
-                                         <View style={{flex:1.2, }}> 
-                                         <Text>{item.color}</Text>
-                                          </View>
-                                            <View style={{flex:1, alignItems:'center'}}> 
-                                            <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: item.color.toLowerCase()}}></View>
+                                            <View style={{ flex: 1.2, }}>
+                                                <Text>{item.color}</Text>
                                             </View>
-                                            <View style={{flex:1}}>
-                                            <TouchableOpacity
-                                             onPress={()=> navigation.navigate("ProductDetail", {products:item})}>
-                                                <Text style={txtbtn}>Show Details</Text>
-                                            </TouchableOpacity>
+                                            <View style={{ flex: 1, alignItems: 'center' }}>
+                                                <View style={{ width: 16, height: 16, borderRadius: 9, backgroundColor: item.color.toLowerCase() }}></View>
                                             </View>
-                                           
+                                            <View style={{ flex: 1 }}>
+                                                <TouchableOpacity
+                                                    onPress={() => navigation.navigate("ProductDetail", { products: item })}>
+                                                    <Text style={txtbtn}>Show Details</Text>
+                                                </TouchableOpacity>
+                                            </View>
+
                                         </View>
                                     </View>
                                 </View>
@@ -81,9 +101,7 @@ const ListProduct = ({ navigation, route }) => {
                         </TouchableOpacity>
 
                     )}>
-
                 </FlatList>
-
             </View>
         </View>
     );
@@ -147,21 +165,22 @@ const styles = StyleSheet.create({
         fontWeight: "500"
     },
     materialproduct: {
+        fontSize: 15,
         fontFamily: 'Avenir',
         paddingBottom: SPACING,
         fontWeight: "500"
     },
-    subdetail: { 
-        paddingRight:SPACING*12,
+    subdetail: {
+        paddingRight: SPACING * 12,
         width: '100%',
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
-    
+
     },
     txtbtn: {
-        fontWeight:'500',
-        fontSize:SPACING*1.2 ,
+        fontWeight: '500',
+        fontSize: SPACING * 1.2,
         color: COLOR.purple,
         textTransform: 'uppercase'
     }

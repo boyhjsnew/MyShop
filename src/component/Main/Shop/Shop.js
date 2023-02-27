@@ -19,8 +19,6 @@ import getData from '../../../Api/getData';
 import { Value } from 'react-native-reanimated';
 import getToken from '../../../Api/getToken';
 
-
-
 const Tab = createBottomTabNavigator();
 // create a component
 const Shop = ({ navigation }) => {
@@ -28,9 +26,7 @@ const Shop = ({ navigation }) => {
   const [types, setTypes] = useState([]);
   const [topProducts, setTopProducts] = useState([])
 
-
   //get categorys
-
 
   useEffect(() => {
     const getTypesApiAsync = async () => {
@@ -63,8 +59,7 @@ const Shop = ({ navigation }) => {
   }, [carts])
 
   const addProductToCart = (products) => {
-    setCarts(carts.concat({ products: products, quantity: 1 }));
-
+       setCarts(carts.concat({ products: products, quantity: 1 }));
   }
   const incrQuantity = (productID) => {
     const newCartArr = carts.map(e => {
@@ -95,6 +90,10 @@ const Shop = ({ navigation }) => {
   global.decrQuantity = decrQuantity;
   global.deleteCart = deleteCart;
 
+  const goToSearch = ()=>{
+    navigation.navigate("Search")
+  }
+  global.clickSearch =goToSearch
   const openDrawer = () => navigation.openDrawer();
   return (
 

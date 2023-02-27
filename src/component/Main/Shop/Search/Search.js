@@ -8,16 +8,16 @@ import SearchView from './SearchView'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import ListProduct from '../ListProduct/ListProduct';
 import ProductDetail from '../ProductDetail/ProductDetail';
+import global from '../../../global';
+import getSearch from '../../../../Api/getSearch';
 
 
 const Stack = createStackNavigator();
 
 // create a component
 
+
 const Search = () => {
-
-
-
   return (
     <NavigationContainer
       independent={true}>
@@ -34,8 +34,5 @@ const Search = () => {
     </NavigationContainer>
   );
 };
-
-
-
 //make this component available to the app
 export default Search;

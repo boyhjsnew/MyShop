@@ -17,9 +17,8 @@ const Stack = createStackNavigator();
 
 const Home = (props) => {
   const {types, topProducts} =props
-  
+
   return (
-    
     <NavigationContainer
       independent={true}>
       <Stack.Navigator 
