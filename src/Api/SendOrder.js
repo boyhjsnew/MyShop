@@ -27,7 +27,8 @@ const SendOrder = async () => {
             {carts && carts.map(carts=>
                 newArray.push({id : carts.products.id , quantity:carts.quantity})
             )}
-           await Order(token ,newArray)
+           const kq =await Order(token ,newArray)
+           return kq
           
         }else{
             alert("Carts is null")

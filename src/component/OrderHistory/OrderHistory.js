@@ -46,7 +46,6 @@ const OrderHistory = () => {
                             </View>
                         </View>
                     }}>
-
                 </FlatList>
             </View>
 

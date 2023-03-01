@@ -10,4 +10,5 @@ export default{
     },
     clickSearch :null,
     find:null,
+    removeAllCart :null
 };

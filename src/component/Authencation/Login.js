@@ -29,12 +29,14 @@ const Login = (props) => {
             {/* form login */}
             <View style={formLogin}>
                 <TextInput
+                    placeholderTextColor={COLOR.gray}
                     onChangeText={setEmail}
                     style={edtEmail}
                     placeholder='Enter your email'></TextInput>
             </View>
             <View style={formPassowrd}>
                 <TextInput
+                placeholderTextColor={COLOR.gray}
                     onChangeText={setPassword}
                     secureTextEntry
                     style={edtPassword}
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
 
     },
     edtEmail: {
+        color:COLOR.gray,
         borderRadius: 100,
         fontSize: SPACING * 1.6,
         paddingLeft: SPACING * 1.4,
@@ -103,6 +106,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.white
     },
     edtPassword: {
+        color:COLOR.gray,
         height: SPACING * 5.5,
         marginTop: SPACING,
         borderRadius: 100,
@@ -115,6 +119,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.white
     },
     btnSignInNow: {
+        
         borderColor: COLOR.white,
         marginTop: SPACING,
         borderRadius: 100,

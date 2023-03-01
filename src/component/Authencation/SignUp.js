@@ -22,18 +22,21 @@ const SignUp = (props ) => {
         {/* form register */}
         <View style={formLogin}>
             <TextInput
+                placeholderTextColor={COLOR.gray}
                 onChangeText={setName}
                 style={edtEmail}
                 placeholder='Enter your name'></TextInput>
         </View>
         <View style={formPassowrd}>
             <TextInput
+                placeholderTextColor={COLOR.gray}
                 onChangeText={setEmail}
                 style={edtPassword}
                 placeholder='Enter your email'></TextInput>
         </View>
         <View style={formPassowrd}>
             <TextInput
+                placeholderTextColor={COLOR.gray}
                 onChangeText={setPassword}
                 secureTextEntry
                 style={edtPassword}
@@ -42,6 +45,7 @@ const SignUp = (props ) => {
         </View>
         <View style={formPassowrd}>
             <TextInput
+                placeholderTextColor={COLOR.gray}
                 onChangeText={setConfirmPassword}
                 secureTextEntry
                 value={confirmpassword}

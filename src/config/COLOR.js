@@ -3,5 +3,4 @@ export default {
     'white' : "#FFF", 
     'gray':'#a0a29e',
     'purple':'purple'
-
 } 

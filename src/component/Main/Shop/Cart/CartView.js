@@ -1,6 +1,6 @@
 //import liraries
 import { useNavigation } from '@react-navigation/native';
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, ViewBase } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import COLOR from '../../../../config/COLOR';
@@ -9,6 +9,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import global from '../../../global'
 import SendOrder from '../../../../Api/SendOrder';
+import saveData from '../../../../Api/saveData';
 
 // create a component
 const CartView = (props) => {
@@ -26,18 +27,13 @@ const CartView = (props) => {
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
-      });
-    
+      });    
     const checkOut = async ()=>{
         if(carts.length <=0){
             alert('Cart Is Null')
         }
         else {
-            SendOrder().then(res =>{
-                if(res =='THEM_THANH_CONG'){
-
-                }
-            })
+            SendOrder().then(res => alert("Completed"))
         }
     }
     return (

@@ -93,7 +93,10 @@ const Shop = ({ navigation }) => {
     })
     setCarts(newCartArr)
   }
-
+  const removeAllCart =()=>{
+    setCarts('');
+  }
+  global.removeAllCart =  removeAllCart
   global.addProductToCart = addProductToCart;
   global.incrQuantity = incrQuantity;
   global.decrQuantity = decrQuantity;
